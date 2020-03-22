@@ -40,7 +40,7 @@ const Create = (props) => {
     audio.play()
   }
 
-  const colors = ['blue', 'pink', 'red', 'green', 'yellow']
+  const colors = ['#d66464', '#da965c', '#e4d37d', 'green', 'yellow']
 
   buttons.forEach((note, i) => {
     note.style.background = colors[i]
@@ -91,12 +91,14 @@ const Create = (props) => {
   }
 
   function getIds(tune) {
+    console.log(tune)
     notes.forEach((obj) => {
       if (obj.sound_file === tune) {
         console.log('match')
         noteIds.push(obj.id)
       }
     })
+    console.log(noteIds)
   }
 
 

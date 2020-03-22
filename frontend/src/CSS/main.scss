@@ -44,6 +44,7 @@ body {
   width: 10%;
   padding: 10px;
   cursor: pointer;
+  border: 2px solid black;
 
   &:hover {
     background: rgb(122, 155, 167);
@@ -81,5 +82,11 @@ input {
 
 .error {
   color: red;
+}
+
+button {
+  padding: 10px;
+  background: rgb(184, 180, 180);
+  cursor: pointer;
 }
 
