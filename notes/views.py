@@ -44,6 +44,7 @@ class SongView(APIView):
         if song.is_valid():
             song.save()
             return Response(song.data, status=HTTP_201_CREATED)
+        print('err', song.errors)
         return Response(song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 
@@ -52,3 +53,16 @@ class SingleNoteView(APIView):
         note = Note.objects.get(pk=pk)
         serializer = NoteSerializer(note)
         return Response(serializer.data)
+
+class SingleSongView(APIView):
+    def get(self, request, pk):
+        song = Song.objects.get(pk=pk)
+        serializer = SongSerializer(song)
+        return Response(serializer.data)
+    
+    def delete(self, request, pk):
+        song = Song.objects.get(pk=pk)
+        serializer = SongSerializer(song)
+        song.delete()
+        return Response(serializer.data)
+    

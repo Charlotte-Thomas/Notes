@@ -10,10 +10,17 @@ const Create = (props) => {
   const [block, setBlock] = useState([])
   const [buttons, setButtons] = useState([])
   const [songList, setSong] = useState([])
-  
+
   const [form, updateForm] = useState()
   const [times, setTimes] = useState([])
   const [noteIds, setNoteIds] = useState([])
+
+  const initialErrorState = { 'title': '', 'notes': '' }
+
+  const [errors, setError] = useState({
+    'title': '',
+    'notes': ''
+  })
 
   useEffect(() => {
     fetch('/api/notes/')
@@ -48,8 +55,9 @@ const Create = (props) => {
   })
 
 
-
   function makeBlockChanges(id) {
+    setError(initialErrorState)
+    console.log(errors.notes)
     const el = (document.getElementsByClassName('subSec')[id])
     el.innerHTML = 'choose sound from selection'
     el.style.opacity = '0.5'
@@ -58,25 +66,27 @@ const Create = (props) => {
   }
 
   function playSong() {
-    console.log('ids', noteIds)
-    console.log(notes)
+    getValues('play')
+  }
+
+  function getValues(play) {
     songList.splice(0, songList.length)
     times.splice(0, times.length)
     noteIds.splice(0, noteIds.length)
     const notesToPlay = document.querySelectorAll('.subSec')
-    console.log(notesToPlay)
     notesToPlay.forEach((n) => {
       songList.push(n.children[1])
     })
-    console.log(songList)
     songList.forEach((tune, i) => {
       setTimeout(() => {
-        tune ? tune.play() + times.push(i) + getIds(tune.attributes[1].value) : console.log('hi')
+        tune && play === 'play' ? tune.play() : console.log('hi')
       }, i * 1000)
+      tune && play === 'save' ? times.push(i) + getIds(tune.attributes[1].value) : console.log('hi')
     })
   }
 
   function handleInput(e) {
+    errors.title = ''
     updateForm(e.target.value)
   }
 
@@ -90,11 +100,19 @@ const Create = (props) => {
   }
 
 
-
   function saveSong() {
+    getValues('save')
     axios.post('/api/songs/', { 'title': form, 'times': times, 'notes': noteIds }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+      .then((resp) => console.log(resp.response.data))
+      .catch((err) => {
+        console.log(err.response.data)
+        setError({
+          'title': err.response.data.title ? err.response.data.title[0] : '', 
+          'notes': err.response.data.notes ? 'add some notes first!' : ''
+        })
+      })
   }
 
 
@@ -103,7 +121,8 @@ const Create = (props) => {
       <h1> Music Creator</h1>
       <div className='centerCol'>
         <h2>Name of song:</h2>
-        <input onChange={(e) => handleInput(e)}></input>
+        <input onChange={(e) => handleInput(e)} placeholder='enter a song title'></input>
+        <p className='error'>{errors.title}</p>
       </div>
       <h3>Sound Selection</h3>
       <div className='noteButtons centerRow'>{notes.map((n, id) => {
@@ -121,7 +140,7 @@ const Create = (props) => {
         </div>
       </section>
       {/* <div>{block === null ? block : console.log('subsec', block)}</div> */}
-
+      <p className='error'>{errors.notes}</p>
       <button onClick={() => saveSong()}>Save Song</button>
     </div>
   )
