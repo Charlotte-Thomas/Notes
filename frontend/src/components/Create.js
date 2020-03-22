@@ -10,8 +10,10 @@ const Create = (props) => {
   const [block, setBlock] = useState([])
   const [buttons, setButtons] = useState([])
   const [songList, setSong] = useState([])
+  
   const [form, updateForm] = useState()
   const [times, setTimes] = useState([])
+  const [noteIds, setNoteIds] = useState([])
 
   useEffect(() => {
     fetch('/api/notes/')
@@ -56,8 +58,11 @@ const Create = (props) => {
   }
 
   function playSong() {
+    console.log('ids', noteIds)
+    console.log(notes)
     songList.splice(0, songList.length)
     times.splice(0, times.length)
+    noteIds.splice(0, noteIds.length)
     const notesToPlay = document.querySelectorAll('.subSec')
     console.log(notesToPlay)
     notesToPlay.forEach((n) => {
@@ -66,7 +71,7 @@ const Create = (props) => {
     console.log(songList)
     songList.forEach((tune, i) => {
       setTimeout(() => {
-        tune ? tune.play() + times.push(i) : console.log('hi')
+        tune ? tune.play() + times.push(i) + getIds(tune.attributes[1].value) : console.log('hi')
       }, i * 1000)
     })
   }
@@ -75,8 +80,19 @@ const Create = (props) => {
     updateForm(e.target.value)
   }
 
+  function getIds(tune) {
+    notes.forEach((obj) => {
+      if (obj.sound_file === tune) {
+        console.log('match')
+        noteIds.push(obj.id)
+      }
+    })
+  }
+
+
+
   function saveSong() {
-    axios.post('/api/useranswers/', { 'title': form, 'times': times, 'notes': notes }, {
+    axios.post('/api/songs/', { 'title': form, 'times': times, 'notes': noteIds }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
   }
@@ -106,6 +122,7 @@ const Create = (props) => {
       </section>
       {/* <div>{block === null ? block : console.log('subsec', block)}</div> */}
 
+      <button onClick={() => saveSong()}>Save Song</button>
     </div>
   )
 }
