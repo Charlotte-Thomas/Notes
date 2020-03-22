@@ -32,7 +32,7 @@ class NoteView(APIView):
         return Response(serializer.data)
 
 class SongView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         songs = Song.objects.all()
         serializer = SongSerializer(songs, many=True)
@@ -45,3 +45,10 @@ class SongView(APIView):
             song.save()
             return Response(song.data, status=HTTP_201_CREATED)
         return Response(song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+class SingleNoteView(APIView):
+    def get(self, request, pk):
+        note = Note.objects.get(pk=pk)
+        serializer = NoteSerializer(note)
+        return Response(serializer.data)

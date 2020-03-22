@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Auth from '../lib/auth'
 
 
 const Create = (props) => {
@@ -9,6 +10,8 @@ const Create = (props) => {
   const [block, setBlock] = useState([])
   const [buttons, setButtons] = useState([])
   const [songList, setSong] = useState([])
+  const [form, updateForm] = useState()
+  const [times, setTimes] = useState([])
 
   useEffect(() => {
     fetch('/api/notes/')
@@ -46,12 +49,15 @@ const Create = (props) => {
 
   function makeBlockChanges(id) {
     const el = (document.getElementsByClassName('subSec')[id])
+    el.innerHTML = 'choose sound from selection'
     el.style.opacity = '0.5'
     block.splice(0, block.length)
     block.push(el)
   }
 
   function playSong() {
+    songList.splice(0, songList.length)
+    times.splice(0, times.length)
     const notesToPlay = document.querySelectorAll('.subSec')
     console.log(notesToPlay)
     notesToPlay.forEach((n) => {
@@ -60,16 +66,29 @@ const Create = (props) => {
     console.log(songList)
     songList.forEach((tune, i) => {
       setTimeout(() => {
-        tune ?  tune.play() : console.log('hi')
+        tune ? tune.play() + times.push(i) : console.log('hi')
       }, i * 1000)
     })
-    songList.splice(0, songList.length)
+  }
+
+  function handleInput(e) {
+    updateForm(e.target.value)
+  }
+
+  function saveSong() {
+    axios.post('/api/useranswers/', { 'title': form, 'times': times, 'notes': notes }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
   }
 
 
   return (
     <div className='createPage centerCol'>
       <h1> Music Creator</h1>
+      <div className='centerCol'>
+        <h2>Name of song:</h2>
+        <input onChange={(e) => handleInput(e)}></input>
+      </div>
       <h3>Sound Selection</h3>
       <div className='noteButtons centerRow'>{notes.map((n, id) => {
         return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>

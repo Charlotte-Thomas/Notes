@@ -6,7 +6,7 @@ User = get_user_model()
 
 # Create your models here.
 class Note(models.Model):
-    note = models.CharField(max_length=200)
+    note = models.CharField(max_length=200, unique=True)
     sound_file = models.FileField(upload_to='notes', null=True)
 
     def __str__(self):
