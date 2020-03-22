@@ -58,7 +58,7 @@ const ButtonAppBar = (props) => {
         <Toolbar className='navBar'>
           {authorized &&
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home">
-              <Link to='/start'>
+              <Link to='/home'>
                 <HomeIcon />
               </Link>
             </IconButton>}
@@ -68,7 +68,7 @@ const ButtonAppBar = (props) => {
           {authorized &&
             <IconButton color="inherit" id="icon">
               {/* <BrushIcon badgeContent={0} color="secondary"> */}
-              <Link to={`/draw/${randomAnswer()}`}>
+              <Link to={'/create'}>
                 <BrushIcon />
               </Link>
               <p className="iconText">Create</p>

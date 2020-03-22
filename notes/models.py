@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.fields import ArrayField
 User = get_user_model()
 
 # Create your models here.
@@ -14,6 +15,7 @@ class Note(models.Model):
 class Song(models.Model):
     title = models.CharField(max_length=60)
     user =  models.ForeignKey(User, related_name='notes', on_delete=models.CASCADE, null=True)
+    times = ArrayField(models.CharField(max_length=200), blank=True, null=True)
     notes = models.ManyToManyField(Note, related_name='notes')
 
     def __str__(self):

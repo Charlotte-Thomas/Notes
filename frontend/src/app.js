@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import './CSS/main.css'
+import './CSS/main.scss'
 
 
 import Login from './components/Login'
 import Register from './components/Register'
+import Create from './components/Create'
 import NavBar from './components/NavBar'
 
 const App = () => (
@@ -15,6 +16,7 @@ const App = () => (
     <Switch>
       <Route exact path='/' component={Login} />
       <Route exact path='/register' component={Register} />
+      <Route exact path='/create' component={Create} />
     </Switch>
   </BrowserRouter>
 )

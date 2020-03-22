@@ -25,7 +25,7 @@ class UserView(APIView):
 
 class NoteView(APIView):
   # added permission_classes to views which need authentication 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         notes = Note.objects.all()
         serializer = NoteSerializer(notes, many=True)
