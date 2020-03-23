@@ -30,6 +30,7 @@ const Create = (props) => {
       })
       .then(() => {
         setButtons(document.querySelectorAll('.noteButton'))
+        createSubSecs()
       })
     return () => console.log('Unmounting component')
   }, [])
@@ -55,10 +56,9 @@ const Create = (props) => {
   })
 
 
-  function makeBlockChanges(id) {
+  function makeBlockChanges(el) {
     setError(initialErrorState)
     console.log(errors.notes)
-    const el = (document.getElementsByClassName('subSec')[id])
     el.innerHTML = 'choose sound from selection'
     el.style.opacity = '0.5'
     block.splice(0, block.length)
@@ -111,11 +111,65 @@ const Create = (props) => {
       .catch((err) => {
         console.log(err.response.data)
         setError({
-          'title': err.response.data.title ? err.response.data.title[0] : '', 
+          'title': err.response.data.title ? err.response.data.title[0] : '',
           'notes': err.response.data.notes ? 'add some notes first!' : ''
         })
       })
   }
+
+  // const songSheet = {
+  //   '0.1': null,
+  //   '0.2': null,
+  //   '0.3': null,
+  //   '1.1': null,
+  //   '1.2': null,
+  //   '1.3': null,
+  //   '2.1': null,
+  // }
+
+  const grid = []
+
+  // function createSongSheet() {
+  //   for (let y = 0; y < 3; y++) {
+  //     const row = []
+  //     for (let x = 0; x < 6; x++) {
+  //       row.push(x)
+  //     }
+  //     grid.push(row)
+  //   }
+  //   console.log(grid)
+  // }
+
+  // createSongSheet()
+
+  function createSubSecs() {
+    const rows = document.querySelectorAll('.row')
+    rows.forEach((row) => {
+      const rowx = []
+      for (let x = 0; x < 6; x++) {
+        const node = document.createElement('div')
+        const audio = document.createElement('audio')
+        node.classList.add('subSec')
+        node.appendChild(audio)
+        row.appendChild(node)
+        rowx.push(node)
+      }
+      grid.push(rowx)
+    })
+    console.log(grid)
+    addClickEvents()
+  }
+
+  function addClickEvents() {
+    grid.forEach((row) => {
+      row.forEach((cell) => {
+        cell.addEventListener('click', () => {
+          makeBlockChanges(cell)
+        })
+      })
+    })
+  }
+
 
 
   return (
@@ -134,11 +188,32 @@ const Create = (props) => {
       <button onClick={() => playSong()}>Play Song</button>
 
       <section className='player'>
-        <div className='row centerRow'>
-          <div className='subSec' onClick={() => makeBlockChanges(0)}><audio></audio></div>
+        <div className='row centerRow' id='row0'>
+          {/* <div className='subSec' onClick={() => makeBlockChanges(0)}><audio></audio></div>
           <div className='subSec' onClick={() => makeBlockChanges(1)}><audio></audio></div>
           <div className='subSec' onClick={() => makeBlockChanges(2)}><audio></audio></div>
           <div className='subSec' onClick={() => makeBlockChanges(3)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(4)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(5)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(6)}><audio></audio></div> */}
+        </div>
+        <div className='row centerRow' id='row1'>
+          {/* <div className='subSec' onClick={() => makeBlockChanges(7)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(8)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(9)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(10)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(11)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(12)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(13)}><audio></audio></div> */}
+        </div>
+        <div className='row centerRow' id='row2'>
+          {/* <div className='subSec' onClick={() => makeBlockChanges(14)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(15)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(16)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(17)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(18)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(19)}><audio></audio></div>
+          <div className='subSec' onClick={() => makeBlockChanges(20)}><audio></audio></div> */}
         </div>
       </section>
       {/* <div>{block === null ? block : console.log('subsec', block)}</div> */}
