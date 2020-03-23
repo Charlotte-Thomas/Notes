@@ -47,11 +47,19 @@ const Create = (props) => {
     note.style.background = colors[i]
     note.addEventListener('click', () => {
       if (block) {
-        block[0].style.background = colors[i]
-        block[0].style.opacity = '1'
-        block[0].innerHTML = note.innerHTML
-        block[0].firstChild.src = note.attributes[1].value
-        updateGrid()
+        if (note.innerHTML === 'clear') {
+          block[0].style.background = 'lightseagreen'
+          block[0].style.opacity = '1'
+          block[0].innerHTML = ''
+          block[0].firstChild.src = ''
+          updateGrid()
+        } else {
+          block[0].style.background = colors[i]
+          block[0].style.opacity = '1'
+          block[0].innerHTML = note.innerHTML
+          block[0].firstChild.src = note.attributes[1].value
+          updateGrid()
+        }
       }
     })
   })
@@ -174,6 +182,7 @@ const Create = (props) => {
         <p className='error'>{errors.title}</p>
       </div>
       <h3>Sound Selection</h3>
+      <div className='noteButton centerRow'>clear</div>
       <div className='noteButtons centerRow'>{notes.map((n, id) => {
         return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
       })}</div>
