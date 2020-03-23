@@ -178,7 +178,7 @@ const Create = (props) => {
       <h1> Music Creator</h1>
       <div className='centerCol'>
         <h2>Name of song:</h2>
-        <input onChange={(e) => handleInput(e)} placeholder='enter a song title'></input>
+        <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
         <p className='error'>{errors.title}</p>
       </div>
       <h3>Sound Selection</h3>
