@@ -10,6 +10,7 @@ const Create = (props) => {
   const [block, setBlock] = useState([])
   const [buttons, setButtons] = useState([])
   const [songList, setSong] = useState([])
+  const [grid, setGrid] = useState([])
 
   const [form, updateForm] = useState()
   const [times, setTimes] = useState([])
@@ -37,7 +38,6 @@ const Create = (props) => {
 
   function playNote(id) {
     const audio = document.getElementsByClassName('noteAudio')[id]
-    // console.log(audio)
     audio.play()
   }
 
@@ -67,32 +67,25 @@ const Create = (props) => {
   }
 
   function playSong() {
-    // getValues('play')
     for (let i = 0; i < 6; i++) {
       setTimeout(() => {
         grid.forEach((row) => {
-          row[i].children[1] ? row[i].children[1].play() : console.log('no')
-          // console.log(row[i].children[1])
+          row[i].children[1] ? row[i].children[1].play() : null
         })
       }, i * 1000)
     }
-
   }
 
-  function getValues(play) {
-    songList.splice(0, songList.length)
-    times.splice(0, times.length)
-    noteIds.splice(0, noteIds.length)
-    const notesToPlay = document.querySelectorAll('.subSec')
-    notesToPlay.forEach((n) => {
-      songList.push(n.children[1])
-    })
-    songList.forEach((tune, i) => {
-      setTimeout(() => {
-        tune && play === 'play' ? tune.play() : console.log('hi')
-      }, i * 1000)
-      tune && play === 'save' ? times.push(i) + getIds(tune.attributes[1].value) : console.log('hi')
-    })
+  function getValues() {
+    setNoteIds([])
+    setTimes([])
+    for (let i = 0; i < 6; i++) {
+      grid.forEach((row) => {
+        const audio = row[i].children[1]
+        audio ? times.push(i) + getIds(audio.attributes[1].value) : null
+      })
+    }
+    console.log('times', times)
   }
 
   function handleInput(e) {
@@ -104,16 +97,16 @@ const Create = (props) => {
     console.log(tune)
     notes.forEach((obj) => {
       if (obj.sound_file === tune) {
-        console.log('match')
+        // console.log('match')
         noteIds.push(obj.id)
       }
     })
-    console.log(noteIds)
+    console.log('ids', noteIds)
   }
 
 
   function saveSong() {
-    getValues('save')
+    getValues()
     axios.post('/api/songs/', { 'title': form, 'times': times, 'notes': noteIds }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -127,7 +120,7 @@ const Create = (props) => {
       })
   }
 
-  const grid = []
+  // ---------- Grid Creation ------------
 
   function createSubSecs() {
     const rows = document.querySelectorAll('.row')
@@ -188,21 +181,10 @@ const Create = (props) => {
       <button onClick={() => playSong()}>Play Song</button>
 
       <section className='player'>
-        <div className='row centerRow' id='row0'>
-          {/* <div className='subSec' onClick={() => makeBlockChanges(0)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(1)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(2)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(3)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(4)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(5)}><audio></audio></div>
-          <div className='subSec' onClick={() => makeBlockChanges(6)}><audio></audio></div> */}
-        </div>
-        <div className='row centerRow' id='row1'>
-        </div>
-        <div className='row centerRow' id='row2'>
-        </div>
+        <div className='row centerRow' id='row0'></div>
+        <div className='row centerRow' id='row1'></div>
+        <div className='row centerRow' id='row2'></div>
       </section>
-      {/* <div>{block === null ? block : console.log('subsec', block)}</div> */}
       <p className='error'>{errors.notes}</p>
       <button onClick={() => saveSong()}>Save Song</button>
     </div>
