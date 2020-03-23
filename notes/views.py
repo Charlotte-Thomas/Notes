@@ -66,3 +66,9 @@ class SingleSongView(APIView):
         song.delete()
         return Response(serializer.data)
     
+
+class SingleUserView(APIView):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
