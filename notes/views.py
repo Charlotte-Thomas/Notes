@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Note, Song, User
 from .serializers import NoteSerializer, SongSerializer, UserSerializer
 
-from pydub import AudioSegment
+# from pydub import AudioSegment
 import os  
 from os.path import abspath, basename, dirname, join, normpath
 
@@ -43,6 +43,7 @@ class SongView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
+        print('requesssst', request)
         request.data['user'] = request.user.id
         song = SongSerializer(data=request.data)
         if song.is_valid():
@@ -78,21 +79,16 @@ class SingleUserView(APIView):
         return Response(serializer.data)
 
 
-# print("/notes/after.wav")
 
-# sound1 = AudioSegment.from_file("/notes/after.wav")
-
-
-# THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-notes_root = settings.MEDIA_ROOT + '/notes'
-my_file = os.path.join(notes_root, 'after.wav')
-my_save = os.path.join(notes_root, 'after2.wav')
+# notes_root = settings.MEDIA_ROOT + '/notes'
+# my_file = os.path.join(notes_root, 'after.wav')
+# my_save = os.path.join(notes_root, 'after2.wav')
 
 
-sound1 = AudioSegment.from_wav(my_file)
-sound2 = AudioSegment.from_wav(my_file)
+# sound1 = AudioSegment.from_wav(my_file)
+# sound2 = AudioSegment.from_wav(my_file)
 
-combined_sounds = sound1 + sound2
+# combined_sounds = sound1 + sound2
 # combined_sounds.export(my_save, format="wav")
 
 
