@@ -47,6 +47,7 @@ const Gallery = (props) => {
       <div className='centerCol allCards'> {data.map((song, id) => {
         return <div className='card centerCol' key={id}>
           <h2 className='title'>{song.title}</h2>
+          <h3 className='artist'>Artist: {artists[id]}</h3>
         </div>
       })}
       </div>

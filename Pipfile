@@ -10,6 +10,7 @@ django = "*"
 psycopg2-binary = "*"
 djangorestframework = "*"
 pyjwt = "*"
+pydub = "*"
 
 [requires]
 python_version = "3.7"

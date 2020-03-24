@@ -16,6 +16,10 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Note, Song, User
 from .serializers import NoteSerializer, SongSerializer, UserSerializer
 
+from pydub import AudioSegment
+import os  
+from os.path import abspath, basename, dirname, join, normpath
+
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
@@ -72,3 +76,25 @@ class SingleUserView(APIView):
         user = User.objects.get(pk=pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+
+# print("/notes/after.wav")
+
+# sound1 = AudioSegment.from_file("/notes/after.wav")
+
+
+# THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+notes_root = settings.MEDIA_ROOT + '/notes'
+my_file = os.path.join(notes_root, 'after.wav')
+my_save = os.path.join(notes_root, 'after2.wav')
+
+
+sound1 = AudioSegment.from_wav(my_file)
+sound2 = AudioSegment.from_wav(my_file)
+
+combined_sounds = sound1 + sound2
+# combined_sounds.export(my_save, format="wav")
+
+
+
+# /Users/charlottethomas/development/projects/Notes/notes

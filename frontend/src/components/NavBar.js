@@ -65,25 +65,25 @@ const ButtonAppBar = (props) => {
           <Typography variant="h6" className={classes.title}>
             Notes
           </Typography>
-          {authorized &&
-            <IconButton color="inherit" id="icon">
-              {/* <BrushIcon badgeContent={0} color="secondary"> */}
-              <Link to={'/create'}>
+          <Link to={'/create'}>
+            {authorized &&
+              <IconButton color="inherit" id="icon">
+                {/* <BrushIcon badgeContent={0} color="secondary"> */}
                 <BrushIcon />
-              </Link>
-              <p className="iconText">Create</p>
-            </IconButton>}
+                <p className="iconText">Create</p>
+              </IconButton>}
+          </Link>
           {authorized &&
             <IconButton color="inherit">
               {/* <BrushIcon badgeContent={0} color="secondary"> */}
-              <Link to='/drawings'>
+              <Link to='/gallery'>
                 <AllInboxIcon />
               </Link>
               <p className="iconText">Song Gallery</p>
             </IconButton>}
           {authorized &&
             <IconButton color="inherit">
-              <Link to='/profile'>  
+              <Link to='/profile'>
                 <FaceIcon />
               </Link>
               <p className="iconText">Profile</p>
