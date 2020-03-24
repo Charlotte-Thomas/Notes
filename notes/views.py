@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Note, Song, User
 from .serializers import NoteSerializer, SongSerializer, UserSerializer
 
-# from pydub import AudioSegment
+from pydub import AudioSegment
 import os  
 from os.path import abspath, basename, dirname, join, normpath
 
@@ -43,9 +43,18 @@ class SongView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        print('requesssst', request)
         request.data['user'] = request.user.id
         song = SongSerializer(data=request.data)
+        allNotes = Note.objects.all()
+        print('requesssst', request.data)
+        print('noteeees', allNotes[0])
+        array = request.data['notes']
+        for note in array:
+          notes = []
+          for audio in note:
+            notes.append(audio)
+            print(audio)
+        # print(song.data.notes)
         if song.is_valid():
             song.save()
             return Response(song.data, status=HTTP_201_CREATED)
