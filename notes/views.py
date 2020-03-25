@@ -47,11 +47,8 @@ class SongView(APIView):
     
     def post(self, request):
         request.data['user'] = request.user.id
-        song = SongSerializer(data=request.data)
         allNotes = Note.objects.get(pk=1)
-        print('requesssst', request.data)
-
-       
+        # print('requesssst', request.data)
         # print('noteeeesdataaa', NoteSerializer(allNotes).data['sound_file'])
         allColumns = []
         array = request.data['notes'] 
@@ -62,9 +59,7 @@ class SongView(APIView):
             if audio:
               currentNote = Note.objects.get(pk=audio)
               url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4]
-              print('spliiiiiiiiit', url)
               notes.append(url)
-          print('audioooo', notes)
 
           audioSegs = []
           for file in notes:
@@ -79,23 +74,25 @@ class SongView(APIView):
                 overlayed = audioSegs[i].overlay(audioSegs[i + 1])
                 audioSegs[i + 1] = overlayed
             allColumns.append(audioSegs[len(audioSegs) - 1])
-            print(allColumns)
+            # print(allColumns)
 
         if len(allColumns) > 0:
           for i in range(len(allColumns)):
             if i != len(allColumns) - 1:
               added = allColumns[i] + allColumns[i + 1]
               allColumns[i + 1] = added
-          print(allColumns)
+          # print(allColumns)
           final_sound = allColumns[len(allColumns) - 1]
           final_sound.duration_seconds == 150
-          print(final_sound.duration_seconds)
           final_sound.export(my_save, format="wav")
+        
+        request.data['song_file'] = '/api/media/notes/' + request.data['title'] + '.wav'
+        song = SongSerializer(data=request.data)
 
         if song.is_valid():
             # song.save()
             return Response(song.data, status=HTTP_201_CREATED)
-        print('err', song.errors)
+        # print('err', song.errors)
         return Response(song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 
