@@ -84,6 +84,7 @@ const Create = (props) => {
     }
   }
 
+
   function getValues() {
     setNoteIds([])
     setTimes([])
@@ -125,8 +126,8 @@ const Create = (props) => {
 
   function saveSong() {
     getValues()
-    console.log({ 'title': form, 'times': times, 'notes': noteIds })
-    axios.post('/api/songs/', { 'title': form ? form : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
+    console.log({ 'title': form.split(' ').join('_'), 'times': times, 'notes': noteIds })
+    axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => console.log(resp.response.data))
