@@ -16,9 +16,12 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Note, Song, User
 from .serializers import NoteSerializer, SongSerializer, UserSerializer
 
+import ffmpeg
 from pydub import AudioSegment
 import os  
 from os.path import abspath, basename, dirname, join, normpath
+
+notes_root = settings.MEDIA_ROOT + '/notes'
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -45,18 +48,52 @@ class SongView(APIView):
     def post(self, request):
         request.data['user'] = request.user.id
         song = SongSerializer(data=request.data)
-        allNotes = Note.objects.all()
+        allNotes = Note.objects.get(pk=1)
         print('requesssst', request.data)
-        print('noteeees', allNotes[0])
-        array = request.data['notes']
+
+       
+        # print('noteeeesdataaa', NoteSerializer(allNotes).data['sound_file'])
+        allColumns = []
+        array = request.data['notes'] 
+        my_save = os.path.join(notes_root, request.data['title'] + '.wav')
         for note in array:
           notes = []
-          for audio in note:
-            notes.append(audio)
-            print(audio)
-        # print(song.data.notes)
+          for audio in note: # always 3 MAX (num of rows)
+            if audio:
+              currentNote = Note.objects.get(pk=audio)
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4]
+              print('spliiiiiiiiit', url)
+              notes.append(url)
+          print('audioooo', notes)
+
+          audioSegs = []
+          for file in notes:
+            my_file = os.path.join(notes_root, file)
+            sound = AudioSegment.from_wav(my_file)
+            audioSegs.append(sound)
+
+          # make sure all audio files are same length otherwise overlay will cut the second note short
+          if len(audioSegs) > 0:  
+            for i in range(len(audioSegs)):
+              if i != len(audioSegs) - 1:
+                overlayed = audioSegs[i].overlay(audioSegs[i + 1])
+                audioSegs[i + 1] = overlayed
+            allColumns.append(audioSegs[len(audioSegs) - 1])
+            print(allColumns)
+
+        if len(allColumns) > 0:
+          for i in range(len(allColumns)):
+            if i != len(allColumns) - 1:
+              added = allColumns[i] + allColumns[i + 1]
+              allColumns[i + 1] = added
+          print(allColumns)
+          final_sound = allColumns[len(allColumns) - 1]
+          final_sound.duration_seconds == 150
+          print(final_sound.duration_seconds)
+          final_sound.export(my_save, format="wav")
+
         if song.is_valid():
-            song.save()
+            # song.save()
             return Response(song.data, status=HTTP_201_CREATED)
         print('err', song.errors)
         return Response(song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
