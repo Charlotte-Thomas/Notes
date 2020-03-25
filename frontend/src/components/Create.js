@@ -125,7 +125,7 @@ const Create = (props) => {
 
   function saveSong() {
     getValues()
-    console.log({ 'title': form ? form : '', 'times': times, 'notes': noteIds })
+    console.log({ 'title': form, 'times': times, 'notes': noteIds })
     axios.post('/api/songs/', { 'title': form ? form : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
