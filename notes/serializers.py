@@ -18,7 +18,7 @@ class NoteSerializer(serializers.ModelSerializer):
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('id', 'title', 'user', 'times', 'notes')
+        fields = ('id', 'title', 'user', 'times', 'notes', 'song_file')
 
 # class PopulatedSongSerializer(SongSerializer):
 #     note = CategorySerializer(many=True)

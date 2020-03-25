@@ -17,7 +17,8 @@ class Song(models.Model):
     user =  models.ForeignKey(User, related_name='notes', on_delete=models.CASCADE, null=True)
     times = ArrayField(models.CharField(max_length=200), blank=True, null=True)
     notes = ArrayField(ArrayField(models.IntegerField(blank=True, null=True), blank=True, null=True), blank=True, null=True)
-    # notes = ArrayField(models.IntegerField(null=True, blank=True), null=True, blank=True)
+    song_file = models.CharField(max_length=100,  blank=True, null=True)
+    # song_file = print('/api/notes/' + str(title) + '.wav')
 
     def __str__(self):
         return f'{self.title}'
