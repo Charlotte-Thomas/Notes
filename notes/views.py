@@ -90,7 +90,7 @@ class SongView(APIView):
         song = SongSerializer(data=request.data)
 
         if song.is_valid():
-            # song.save()
+            song.save()
             return Response(song.data, status=HTTP_201_CREATED)
         # print('err', song.errors)
         return Response(song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)

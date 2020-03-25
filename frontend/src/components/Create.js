@@ -88,11 +88,19 @@ const Create = (props) => {
     setNoteIds([])
     setTimes([])
     for (let i = 0; i < 6; i++) {
+      const ids = []
       grid.forEach((row) => {
         const audio = row[i].children[1]
-        audio ? times.push(i) + getIds(audio.attributes[1].value) : null
+        if (audio) {
+          times.push(i)
+          ids.push(getIds(audio.attributes[1].value))
+        } else {
+          ids.push(0)
+        }
       })
+      noteIds.push(ids)
     }
+    console.log('ids', noteIds)
     console.log('times', times)
   }
 
@@ -102,20 +110,23 @@ const Create = (props) => {
   }
 
   function getIds(tune) {
+    let giveId = 0
     console.log(tune)
     notes.forEach((obj) => {
       if (obj.sound_file === tune) {
-        // console.log('match')
-        noteIds.push(obj.id)
+        console.log('match')
+        // noteIds.push(obj.id)
+        giveId = obj.id
       }
     })
-    console.log('ids', noteIds)
+    return giveId
   }
 
 
   function saveSong() {
     getValues()
-    axios.post('/api/songs/', { 'title': form, 'times': times, 'notes': noteIds }, {
+    console.log({ 'title': form ? form : '', 'times': times, 'notes': noteIds })
+    axios.post('/api/songs/', { 'title': form ? form : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => console.log(resp.response.data))
@@ -170,7 +181,6 @@ const Create = (props) => {
     })
     // console.log(grid)
   }
-
 
 
   return (
