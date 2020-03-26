@@ -102,6 +102,12 @@ class SingleNoteView(APIView):
         serializer = NoteSerializer(note)
         return Response(serializer.data)
 
+    def delete(self, request, pk):
+        note = Note.objects.get(pk=pk)
+        serializer = NoteSerializer(note)
+        note.delete()
+        return Response(serializer.data)
+
 class SingleSongView(APIView):
     def get(self, request, pk):
         song = Song.objects.get(pk=pk)

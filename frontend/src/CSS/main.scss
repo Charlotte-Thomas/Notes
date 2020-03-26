@@ -65,6 +65,9 @@ body {
 
 .subSec {
   // width: 33.3%;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
   flex: 1;
   height: 100%;
   background: lightseagreen;
@@ -73,7 +76,8 @@ body {
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(22, 126, 121);
+    // background: rgb(22, 126, 121);
+    opacity: 0.7;
   }
 }
 

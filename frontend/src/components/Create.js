@@ -41,14 +41,15 @@ const Create = (props) => {
     audio.play()
   }
 
-  const colors = ['#d66464', '#da965c', '#e4d37d', 'green', 'yellow']
+  const colors = ['#d66464', '#da965c', 'rgb(240, 225, 145)', 'rgb(133, 209, 180)', 'rgb(138, 245, 218)', 'rgb(138, 220, 245)']
 
   buttons.forEach((note, i) => {
     note.style.background = colors[i]
     note.addEventListener('click', () => {
       if (block) {
         if (note.innerHTML === 'clear') {
-          block[0].style.background = 'lightseagreen'
+          // block[0].classList.toggle('green')
+          block[0].style.backgroundColor = 'lightseagreen'
           block[0].style.opacity = '1'
           block[0].innerHTML = ''
           block[0].firstChild.src = ''
@@ -126,7 +127,7 @@ const Create = (props) => {
 
   function saveSong() {
     getValues()
-    console.log({ 'title': form.split(' ').join('_'), 'times': times, 'notes': noteIds })
+    console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -150,6 +151,7 @@ const Create = (props) => {
         const node = document.createElement('div')
         const audio = document.createElement('audio')
         node.classList.add('subSec')
+        node.classList.add('centerRow')
         node.appendChild(audio)
         row.appendChild(node)
         rowx.push(node)
@@ -166,6 +168,12 @@ const Create = (props) => {
         cell.addEventListener('click', () => {
           makeBlockChanges(cell)
         })
+        // cell.addEventListener('mouseover', () => {
+        //   cell.style.opacity = '0.7'
+        // })
+        // cell.addEventListener('mouseout', () => {
+        //   cell.style.opacity = '1'
+        // })
       })
     })
   }

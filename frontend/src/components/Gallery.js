@@ -50,7 +50,7 @@ const Gallery = (props) => {
           <h3 className='artist'>Artist: {artists[id]}</h3>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />
-          </ThemeProvider>;
+          </ThemeProvider>
         </div>
       })}
       </div>
