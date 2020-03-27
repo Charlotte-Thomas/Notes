@@ -11,17 +11,8 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import pallet from '@material-ui/core/colors/blueGrey'
-import { blue } from '@material-ui/core/colors'
-
-
-import {
-  fade,
-  ThemeProvider,
-  withStyles,
-  createMuiTheme,
-} from '@material-ui/core/styles'
 
 const initialLoginState = {
   username: '',
@@ -86,7 +77,6 @@ const Login = (props) => {
   const [error, setError] = useState(errorInitialState)
 
   function handleInput(e) {
-    console.log(e.target.name)
     updateForm({ ...form, [e.target.name]: e.target.value })
     setError({ ...error, errors: '' })
   }
@@ -107,8 +97,7 @@ const Login = (props) => {
     palette: {
       primary: {
         main: '#455a64'
-      },
-      secondary: blue
+      }
     }
   })
 

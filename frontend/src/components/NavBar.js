@@ -13,18 +13,28 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import AllInboxIcon from '@material-ui/icons/AllInbox'
 import { Link } from 'react-router-dom'
 import FaceIcon from '@material-ui/icons/Face'
+import pallet from '@material-ui/core/colors/blueGrey'
 
 import Auth from '../lib/auth'
+import { withTheme } from '@material-ui/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: pallet[900]
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
   title: {
     flexGrow: 1
+  },
+  link: {
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+      opacity: 0.8
+    }
   }
 }))
 
@@ -51,51 +61,48 @@ const ButtonAppBar = (props) => {
   }, [props.match.params])
 
 
-
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar className='navBar'>
+    <AppBar position="static" className={classes.root}>
+      <Toolbar className='navBar'>
+        {authorized &&
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home">
+            <Link to='/home'>
+              <HomeIcon className={classes.link} />
+            </Link>
+          </IconButton>}
+        <Typography variant="h6" className={classes.title}>
+          Notes
+        </Typography>
+        <Link to={'/create'}>
           {authorized &&
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home">
-              <Link to='/home'>
-                <HomeIcon />
-              </Link>
-            </IconButton>}
-          <Typography variant="h6" className={classes.title}>
-            Notes
-          </Typography>
-          <Link to={'/create'}>
-            {authorized &&
-              <IconButton color="inherit" id="icon">
-                {/* <BrushIcon badgeContent={0} color="secondary"> */}
-                <BrushIcon />
-                <p className="iconText">Create</p>
-              </IconButton>}
-          </Link>
-          {authorized &&
-            <IconButton color="inherit">
+            <IconButton color="inherit" id="icon">
               {/* <BrushIcon badgeContent={0} color="secondary"> */}
-              <Link to='/gallery'>
-                <AllInboxIcon />
-              </Link>
-              <p className="iconText">Song Gallery</p>
+              <BrushIcon />
+              <p className="iconText">Create</p>
             </IconButton>}
-          {authorized &&
-            <IconButton color="inherit">
-              <Link to='/profile'>
-                <FaceIcon />
-              </Link>
-              <p className="iconText">Profile</p>
-            </IconButton>}
-          {!authorized && <Button color="inherit"><Link to="/" style={{ textDecoration: 'none' }}>Login</Link></Button>}
-          {!authorized && <Button color="inherit"><Link to="/register" style={{ textDecoration: 'none' }}>Register</Link></Button>}
-          {/* {Auth.isAuthorized() && */}
-          {authorized && <Button color="inherit"><Link to="/" style={{ textDecoration: 'none' }} onClick={() => handleLogout()}>Log Out</Link></Button>}
-          {/* } */}
-        </Toolbar>
-      </AppBar>
-    </div>
+        </Link>
+        {authorized &&
+          <IconButton color="inherit">
+            {/* <BrushIcon badgeContent={0} color="secondary"> */}
+            <Link to='/gallery'>
+              <AllInboxIcon />
+            </Link>
+            <p className="iconText">Song Gallery</p>
+          </IconButton>}
+        {authorized &&
+          <IconButton color="inherit">
+            <Link to='/profile'>
+              <FaceIcon />
+            </Link>
+            <p className="iconText">Profile</p>
+          </IconButton>}
+        {!authorized && <Button><Link to="/" className={classes.link}>Login</Link></Button>}
+        {!authorized && <Button><Link to="/register" className={classes.link}>Register</Link></Button>}
+        {/* {Auth.isAuthorized() && */}
+        {authorized && <Button><Link to="/" className={classes.link} onClick={() => handleLogout()}>Log Out</Link></Button>}
+        {/* } */}
+      </Toolbar>
+    </AppBar>
   )
 }
 
