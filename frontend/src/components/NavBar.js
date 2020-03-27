@@ -35,6 +35,12 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       opacity: 0.8
     }
+  },
+  border: {
+    borderRight: '1px solid white',
+    borderRadius: '0%',
+    paddingRight: '1.5%',
+    marginRight: '0.9%'
   }
 }))
 
@@ -73,29 +79,25 @@ const ButtonAppBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           Notes
         </Typography>
-        <Link to={'/create'}>
-          {authorized &&
-            <IconButton color="inherit" id="icon">
-              {/* <BrushIcon badgeContent={0} color="secondary"> */}
-              <BrushIcon />
-              <p className="iconText">Create</p>
-            </IconButton>}
-        </Link>
         {authorized &&
-          <IconButton color="inherit">
-            {/* <BrushIcon badgeContent={0} color="secondary"> */}
-            <Link to='/gallery'>
-              <AllInboxIcon />
+          <Button color="inherit" className={classes.link}>
+            <Link className={classes.link} to='/create'>
+              Create
             </Link>
-            <p className="iconText">Song Gallery</p>
-          </IconButton>}
+          </Button>}
         {authorized &&
-          <IconButton color="inherit">
-            <Link to='/profile'>
-              <FaceIcon />
+          <Button color="inherit" className={classes.link}>
+            <Link className={classes.link} to='/gallery'>
+              Song Gallery
             </Link>
-            <p className="iconText">Profile</p>
-          </IconButton>}
+          </Button>}
+        {authorized &&
+          <Button color="inherit" className={classes.link, classes.border}>
+            <Link className={classes.link} to='/profile'>
+              {/* <FaceIcon /> */}
+              Profile
+            </Link>
+          </Button>}
         {!authorized && <Button><Link to="/" className={classes.link}>Login</Link></Button>}
         {!authorized && <Button><Link to="/register" className={classes.link}>Register</Link></Button>}
         {/* {Auth.isAuthorized() && */}

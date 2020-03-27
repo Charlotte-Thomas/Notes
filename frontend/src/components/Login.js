@@ -29,10 +29,17 @@ const useStyles = makeStyles(theme => ({
     height: '100vh'
   },
   image: {
-    backgroundImage: 'url(https://i.imgur.com/M9zJaqv.gif?noredirect)',
+    // backgroundImage: 'url(https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80)',
+    // backgroundImage: 'url(https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F750037840%2F960x0.jpg%3Ffit%3Dscale)',
+    // backgroundImage: 'url(https://media3.giphy.com/media/26tn7BL2UDTMVWovu/source.gif)',
+    // backgroundImage: 'url(https://static.wixstatic.com/media/7bddf5_3126b12e05c340daaaac1950336a6ad6~mv2.gif)',
+    // backgroundImage: 'url(https://media1.giphy.com/media/nvLC05cEEoxtS/source.gif)',
+    // backgroundImage: 'url(https://i.pinimg.com/originals/11/3c/be/113cbe7d34450c483a70d182d70b3669.gif)',
+    // backgroundImage: 'url(https://i.pinimg.com/originals/75/41/73/754173126befd0e848fe5f30ca884b26.gif)',
+    backgroundImage: 'url(https://cdn.dribbble.com/users/1242979/screenshots/7099165/media/e521bd143bf1e795af3ec725a68e273f.gif)',
     backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
+    backgroundColor: pallet[400],
+      // theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   },
