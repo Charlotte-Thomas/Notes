@@ -114,7 +114,7 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
+          <form className={classes.form, 'loginForm'} onSubmit={(e) => handleSubmit(e)}>
             <ThemeProvider theme={theme}>
               <TextField
                 variant="filled"

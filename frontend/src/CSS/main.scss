@@ -119,10 +119,26 @@ button {
   // background: blue;
 }
 
+// gets rid of / changes colour of auto fill that chrome adds when it auto fills form inputs:
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #a1adb1 inset !important;
+.loginForm {
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px #a1adb1 inset !important;
+  }
+
+}
+
+.registerForm {
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px #78909c inset !important;
+  }
+
 }
