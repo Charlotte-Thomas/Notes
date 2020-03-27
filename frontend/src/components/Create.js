@@ -2,9 +2,25 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Auth from '../lib/auth'
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
+
+const useStyles = makeStyles(() => ({
+  cell: {
+    backgroundColor: 'lightseagreen',
+    opacity: 1,
+    '&:hover': {
+      opacity: 0.7
+    }
+  },
+  opacity: {
+    opacity: 0.5
+  }
+}))
 
 const Create = (props) => {
+
+  const classes = useStyles()
 
   const [notes, setNotes] = useState([])
   const [block, setBlock] = useState([])
@@ -47,16 +63,17 @@ const Create = (props) => {
     note.style.background = colors[i]
     note.addEventListener('click', () => {
       if (block) {
+        block[0].classList.remove(classes.opacity)
         if (note.innerHTML === 'clear') {
-          // block[0].classList.toggle('green')
-          block[0].style.backgroundColor = 'lightseagreen'
-          block[0].style.opacity = '1'
+          block[0].style.background = ''
+          block[0].classList.add(classes.cell)
           block[0].innerHTML = ''
           block[0].firstChild.src = ''
           updateGrid()
         } else {
           block[0].style.background = colors[i]
-          block[0].style.opacity = '1'
+          block[0].classList.add(classes.colors)
+          block[0].classList.remove(classes.cell)
           block[0].innerHTML = note.innerHTML
           block[0].firstChild.src = note.attributes[1].value
           updateGrid()
@@ -70,7 +87,8 @@ const Create = (props) => {
     setError(initialErrorState)
     console.log(errors.notes)
     el.innerHTML = 'choose sound from selection'
-    el.style.opacity = '0.5'
+    el.classList.add(classes.opacity)
+    // el.style.opacity = '0.5'
     block.splice(0, block.length)
     block.push(el)
   }
@@ -152,6 +170,7 @@ const Create = (props) => {
         const audio = document.createElement('audio')
         node.classList.add('subSec')
         node.classList.add('centerRow')
+        node.classList.add(classes.cell)
         node.appendChild(audio)
         row.appendChild(node)
         rowx.push(node)
@@ -168,12 +187,6 @@ const Create = (props) => {
         cell.addEventListener('click', () => {
           makeBlockChanges(cell)
         })
-        // cell.addEventListener('mouseover', () => {
-        //   cell.style.opacity = '0.7'
-        // })
-        // cell.addEventListener('mouseout', () => {
-        //   cell.style.opacity = '1'
-        // })
       })
     })
   }
