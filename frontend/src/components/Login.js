@@ -12,6 +12,16 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import pallet from '@material-ui/core/colors/blueGrey'
+import { blue } from '@material-ui/core/colors'
+
+
+import {
+  fade,
+  ThemeProvider,
+  withStyles,
+  createMuiTheme,
+} from '@material-ui/core/styles'
 
 const initialLoginState = {
   username: '',
@@ -43,14 +53,28 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: pallet[800]
   },
   form: {
     width: '100%',
     marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: pallet[800],
+    color: pallet[50],
+    '&:hover': {
+      backgroundColor: pallet[700]
+    }
+  },
+  grid: {
+    backgroundColor: pallet[400]
+  },
+  textField: {
+    backgroundColor: '#b0bec3'
+  },
+  link: {
+    color: pallet[800]
   }
 }))
 
@@ -62,6 +86,7 @@ const Login = (props) => {
   const [error, setError] = useState(errorInitialState)
 
   function handleInput(e) {
+    console.log(e.target.name)
     updateForm({ ...form, [e.target.name]: e.target.value })
     setError({ ...error, errors: '' })
   }
@@ -73,16 +98,26 @@ const Login = (props) => {
       .then(resp => {
         Auth.setToken(resp.data.token)
       })
-      .then(() => props.history.push('/start'))
+      .then(() => props.history.push('/home'))
       .catch((err) => setError({ errors: 'Email or Password Incorrect' }))
   }
+
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#455a64'
+      },
+      secondary: blue
+    }
+  })
 
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.grid}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -90,59 +125,69 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}  onSubmit={(e) => handleSubmit(e)}>
-            <TextField
-              // variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              type="text"
-              label="username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              onChange={(e) => handleInput(e)}
-            />
-            <TextField
-              // variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              type="text"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={(e) => handleInput(e)}
-            />
-            <TextField
-              // variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              type="text"
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(e) => handleInput(e)}
-            />
+          <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
+            <ThemeProvider theme={theme}>
+              <TextField
+                variant="filled"
+                className={classes.margin, classes.textField}
+                margin="normal"
+                required
+                fullWidth
+                type="text"
+                label="username"
+                id="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                onChange={(e) => handleInput(e)}
+              />
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <TextField
+                variant="filled"
+                className={classes.margin, classes.textField}
+                margin="normal"
+                required
+                fullWidth
+                type="text"
+                label="Email Address"
+                id="email"
+                name='email'
+                autoComplete="email"
+                autoFocus
+                onChange={(e) => handleInput(e)}
+              />
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <TextField
+                variant="filled"
+                className={classes.margin, classes.textField}
+                margin="normal"
+                required
+                fullWidth
+                type="password"
+                label="Password"
+                id="password"
+                name="password"
+                autoComplete="password"
+                autoFocus
+                onChange={(e) => handleInput(e)}
+              // className={classes.textField}
+              />
+            </ThemeProvider>
             {error.errors && <small className="help is-danger">{error.errors}</small>}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              // color="secondary"
               className={classes.submit}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href="/register" className={classes.link} variant="body2">
                   {'Don\'t have an account? Join here'}
                 </Link>
               </Grid>
