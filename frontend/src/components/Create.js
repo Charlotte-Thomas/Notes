@@ -207,7 +207,7 @@ const Create = (props) => {
 
   return (
     <div className='createPage centerCol'>
-      <h1> Music Creator</h1>
+      <h1 className='createTitle'> Music Creator </h1>
       <div className='centerCol'>
         <h2>Name of song:</h2>
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
@@ -219,13 +219,15 @@ const Create = (props) => {
         return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
       })}</div>
 
-      <button onClick={() => playSong()}>Play Song</button>
+      <div className='playingBlocks centerRow'>
+        <button className='playButton' onClick={() => playSong()}></button>
+        <section className='player'>
+          <div className='row centerRow' id='row0'></div>
+          <div className='row centerRow' id='row1'></div>
+          <div className='row centerRow' id='row2'></div>
+        </section>
+      </div>
 
-      <section className='player'>
-        <div className='row centerRow' id='row0'></div>
-        <div className='row centerRow' id='row1'></div>
-        <div className='row centerRow' id='row2'></div>
-      </section>
       <p className='error'>{errors.notes}</p>
       <button onClick={() => saveSong()}>Save Song</button>
     </div>
@@ -233,3 +235,8 @@ const Create = (props) => {
 }
 
 export default Create
+
+
+
+//use focus for sound selection 
+// use focus to be setTimeout for play button

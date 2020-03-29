@@ -20,15 +20,21 @@ body {
 .centerCol {
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  // justify-content:center;
   align-items: center;
   /* background: blue; */
 }
 
 .createPage {
-  height: 90%;
-  // background: pink;
+  height: 100%;
+  background: #cfd8dc;
   justify-content: space-evenly;
+  color: #253238;
+}
+
+.createTitle {
+  font-size: 70px;
+  margin: 20px;
 }
 
 .noteButtons {
@@ -51,9 +57,34 @@ body {
   }
 }
 
+.playingBlocks {
+  width: 100%;
+  height: 200px;
+  // background-color: blue;
+}
+
+.playButton {
+  height: 100%;
+  border: 1px solid black;
+  border-right: none;
+  padding: 0 4%;
+  background-image: url('https://www.searchpng.com/wp-content/uploads/2019/02/Play-Free-PNG-Icon-715x673.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #eceff1;
+
+  &:focus {
+    outline: 0;
+    opacity: 0.7;
+  }
+  // &:hover {
+  // }
+}
+
 .player {
   width: 80%;
-  height: 200px;
+  height: 99%;
   background: lightblue;
 }
 
@@ -74,11 +105,6 @@ body {
   border: 1px solid black;
   text-align: center;
   cursor: pointer;
-
-  // &:hover {
-  //   // background: rgb(22, 126, 121);
-  //   opacity: 0.7;
-  // }
 }
 
 input {
