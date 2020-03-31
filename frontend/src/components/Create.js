@@ -223,7 +223,7 @@ const Create = (props) => {
       })
       grid.push(rowx)
     }
-    console.log('newgrid', grid)
+    // console.log('newgrid', grid)
   }
 
   function addNewSection() {
@@ -237,7 +237,7 @@ const Create = (props) => {
       const row = document.createElement('div')
       row.classList.add('row')
       row.classList.add('centerRow')
-      // row.classList.add('addedRow')
+      row.classList.add('addedRow')
       row.classList.add(newClass)
       node.appendChild(row)
     }
