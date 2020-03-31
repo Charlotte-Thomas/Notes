@@ -163,6 +163,14 @@ input {
   }
 }
 
+.focus {
+  cursor: pointer;
+
+  &:focus {
+    opacity: 0.5,
+  }
+}
+
 
 // --------- Gallery -------------
 
