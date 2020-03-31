@@ -57,16 +57,14 @@ const Create = (props) => {
     audio.play()
   }
 
-  const colors = ['#d66464', '#da965c', 'rgb(240, 225, 145)', 'rgb(133, 209, 180)', 'rgb(138, 245, 218)', 'rgb(138, 220, 245)']
+  const colors = ['grey', '#d66464', '#da965c', 'rgb(240, 225, 145)', 'rgb(133, 209, 180)', 'rgb(138, 245, 218)', 'rgb(138, 220, 245)']
 
   buttons.forEach((note, i) => {
     note.style.background = colors[i]
-    note.addEventListener('click', (n) => {
-      console.log(n)
+    note.addEventListener('click', () => {
       if (block) {
         block.forEach((b) => {
           b.classList.remove(classes.opacity)
-          console.log(note.innerHTML)
           if (note.innerHTML === 'clear') {
             b.style.background = ''
             b.classList.add(classes.cell)
@@ -86,9 +84,6 @@ const Create = (props) => {
       block.splice(0, block.length)
     })
   })
-
-  //STOP HERE
-  //STOOOOOOOOP
 
 
   function makeBlockChanges(el) {

@@ -99,6 +99,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: #eceff1;
+  cursor: pointer;
 
   &:focus {
     outline: 0;
@@ -131,12 +132,6 @@ body {
   border: 1px solid black;
   text-align: center;
   cursor: pointer;
-
-  // &:focus {
-  //   opacity: 0.5;
-  //   outline: 0;
-  //   color: black;
-  // }
 }
 
 input {
@@ -149,12 +144,6 @@ input {
 .error {
   color: red;
 }
-
-// button {
-//   padding: 10px;
-//   background: rgb(184, 180, 180);
-//   cursor: pointer;
-// }
 
 .saveButton {
   padding: 15px;
