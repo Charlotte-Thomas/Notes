@@ -61,35 +61,44 @@ const Create = (props) => {
 
   buttons.forEach((note, i) => {
     note.style.background = colors[i]
-    note.addEventListener('click', () => {
+    note.addEventListener('click', (n) => {
+      console.log(n)
       if (block) {
-        block[0].classList.remove(classes.opacity)
-        if (note.innerHTML === 'clear') {
-          block[0].style.background = ''
-          block[0].classList.add(classes.cell)
-          block[0].innerHTML = ''
-          block[0].firstChild.src = ''
-          updateGrid()
-        } else {
-          block[0].style.background = colors[i]
-          block[0].classList.add(classes.colors)
-          block[0].classList.remove(classes.cell)
-          block[0].innerHTML = note.innerHTML
-          block[0].firstChild.src = note.attributes[1].value
-          updateGrid()
-        }
+        block.forEach((b) => {
+          b.classList.remove(classes.opacity)
+          console.log(note.innerHTML)
+          if (note.innerHTML === 'clear') {
+            b.style.background = ''
+            b.classList.add(classes.cell)
+            b.innerHTML = ''
+            // b.firstChild.src = '' // this apparently doesn't exist 
+            updateGrid()
+          } else {
+            b.style.background = colors[i]
+            b.classList.add(classes.colors)
+            b.classList.remove(classes.cell)
+            b.innerHTML = note.innerHTML
+            b.firstChild.src = note.attributes[1].value
+            updateGrid()
+          }
+        })
       }
+      block.splice(0, block.length)
     })
   })
 
+  //STOP HERE
+  //STOOOOOOOOP
+
 
   function makeBlockChanges(el) {
+    console.log(el.children)
     setError(initialErrorState)
     console.log(errors.notes)
     el.innerHTML = 'choose sound from selection'
     el.classList.add(classes.opacity)
     // el.style.opacity = '0.5'
-    block.splice(0, block.length)
+    // block.splice(0, block.length)
     block.push(el)
   }
 
@@ -215,7 +224,7 @@ const Create = (props) => {
       </div>
       <div className="soundSelection centerCol">
         <h3>Sound Selection</h3>
-        <div className='clearButton centerRow'>clear</div>
+        <div className='noteButton clearButton centerRow'>clear</div>
         <div className='noteButtons centerRow'>{notes.map((n, id) => {
           return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
         })}</div>
