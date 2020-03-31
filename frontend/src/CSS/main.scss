@@ -28,7 +28,7 @@ body {
 .createPage {
   height: 100%;
   background: #cfd8dc;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   color: #253238;
 }
 
@@ -37,20 +37,46 @@ body {
   margin: 20px;
 }
 
+.soundSelection {
+  width: 80%;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0px;
+}
+
 .noteButtons {
-  width: 60%;
+  width: 100%;
+  flex-wrap: wrap;
   justify-content:space-evenly;
   align-items: center;
+  margin-top: 15px;
   // background-color: lightcoral;
+}
+
+.clearButton {
+  background: rgb(75, 73, 73);
+  color: white;
+  padding: 20px;
+  // width: 10%;
+  border: 2px solid black;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    opacity: 0.8;
+    }
 }
 
 .noteButton {
   background: lightblue;
-  // flex: 1;
-  width: 10%;
-  padding: 10px;
+  flex: 1;
+  min-width: 100px;
+  max-width: 100px;
+  // padding: 5px;
+  margin: 2px;
   cursor: pointer;
   border: 2px solid black;
+  border-radius: 10%;
 
   &:hover {
   opacity: 0.8;
@@ -118,10 +144,23 @@ input {
   color: red;
 }
 
-button {
-  padding: 10px;
+// button {
+//   padding: 10px;
+//   background: rgb(184, 180, 180);
+//   cursor: pointer;
+// }
+
+.saveButton {
+  padding: 15px;
+  width: 10%;
   background: rgb(184, 180, 180);
   cursor: pointer;
+  font-size: 20px;
+
+  &:focus {
+    outline: 0;
+    border: none;
+  }
 }
 
 

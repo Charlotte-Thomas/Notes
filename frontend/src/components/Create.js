@@ -213,11 +213,13 @@ const Create = (props) => {
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
         <p className='error'>{errors.title}</p>
       </div>
-      <h3>Sound Selection</h3>
-      <div className='noteButton centerRow'>clear</div>
-      <div className='noteButtons centerRow'>{notes.map((n, id) => {
-        return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
-      })}</div>
+      <div className="soundSelection centerCol">
+        <h3>Sound Selection</h3>
+        <div className='clearButton centerRow'>clear</div>
+        <div className='noteButtons centerRow'>{notes.map((n, id) => {
+          return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
+        })}</div>
+      </div>
 
       <div className='playingBlocks centerRow'>
         <button className='playButton' onClick={() => playSong()}></button>
@@ -229,7 +231,7 @@ const Create = (props) => {
       </div>
 
       <p className='error'>{errors.notes}</p>
-      <button onClick={() => saveSong()}>Save Song</button>
+      <button className='saveButton' onClick={() => saveSong()}>Save</button>
     </div>
   )
 }
