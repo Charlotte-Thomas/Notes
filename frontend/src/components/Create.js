@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Auth from '../lib/auth'
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { withTheme } from '@material-ui/styles'
 
 
 const useStyles = makeStyles(() => ({
@@ -31,6 +32,8 @@ const Create = (props) => {
   const [form, updateForm] = useState()
   const [times, setTimes] = useState([])
   const [noteIds, setNoteIds] = useState([])
+
+  const [rowWidth, setWidth] = useState(10)
 
   const initialErrorState = { 'title': '', 'notes': '' }
 
@@ -87,7 +90,6 @@ const Create = (props) => {
 
 
   function makeBlockChanges(el) {
-    console.log(el.children)
     setError(initialErrorState)
     console.log(errors.notes)
     el.innerHTML = 'choose sound from selection'
@@ -98,7 +100,8 @@ const Create = (props) => {
   }
 
   function playSong() {
-    for (let i = 0; i < 6; i++) {
+    // console.log('playgrdi', rowWidth)
+    for (let i = 0; i < rowWidth; i++) {
       setTimeout(() => {
         grid.forEach((row) => {
           row[i].children[1] ? row[i].children[1].play() : null
@@ -111,7 +114,7 @@ const Create = (props) => {
   function getValues() {
     setNoteIds([])
     setTimes([])
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < rowWidth; i++) {
       const ids = []
       grid.forEach((row) => {
         const audio = row[i].children[1]
@@ -165,11 +168,17 @@ const Create = (props) => {
 
   // ---------- Grid Creation ------------
 
-  function createSubSecs() {
-    const rows = document.querySelectorAll('.row')
-    rows.forEach((row) => {
+  function createSubSecs(newRows) {
+    console.log(newRows)
+    let newClass = '.row'
+    if (newRows) {
+      newClass = newRows
+    }
+    const rows = document.querySelectorAll(newClass)
+
+    rows.forEach((row, index) => {
       const rowx = []
-      for (let x = 0; x < 6; x++) {
+      for (let x = 0; x < 10; x++) {
         const node = document.createElement('div')
         const audio = document.createElement('audio')
         node.classList.add('subSec')
@@ -178,9 +187,15 @@ const Create = (props) => {
         node.appendChild(audio)
         row.appendChild(node)
         rowx.push(node)
+        if (newRows) {
+          grid[index].push(node)
+        }
       }
-      grid.push(rowx)
+      if (!newRows) {
+        grid.push(rowx)
+      }
     })
+    // console.log('chuild', rows[0].children.length > 0 ? 'yay' : 'empty')
     console.log(grid)
     addClickEvents()
   }
@@ -196,17 +211,42 @@ const Create = (props) => {
   }
 
   function updateGrid() {
+    console.log('rowwidth', rowWidth)
     grid.splice(0, grid.length)
-    const rows = document.querySelectorAll('.row')
-    rows.forEach((row) => {
+    const sections = document.querySelectorAll('.player')
+    for (let y = 0; y < 3; y++) {
       const rowx = []
-      for (let x = 0; x < 6; x++) {
-        rowx.push(row.children[x])
-      }
+      sections.forEach((sec) => {
+        for (let x = 0; x < 10; x++) {
+          rowx.push(sec.children[y].children[x])
+        }
+      })
       grid.push(rowx)
-    })
-    // console.log(grid)
+    }
+    console.log('newgrid', grid)
   }
+
+  function addNewSection() {
+    const prevWidth = rowWidth
+    const newClass = `newRow${prevWidth}`
+    const player = document.querySelector('.playingBlocks')
+    console.log(newClass)
+    const node = document.createElement('section')
+    node.classList.add('player')
+    for (let i = 0; i < 3; i++) {
+      const row = document.createElement('div')
+      row.classList.add('row')
+      row.classList.add('centerRow')
+      // row.classList.add('addedRow')
+      row.classList.add(newClass)
+      node.appendChild(row)
+    }
+    player.appendChild(node)
+    setWidth(rowWidth + 10)
+    createSubSecs(`.${newClass}`)
+  }
+
+
 
 
   return (
@@ -233,6 +273,7 @@ const Create = (props) => {
           <div className='row centerRow' id='row2'></div>
         </section>
       </div>
+      <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
 
       <p className='error'>{errors.notes}</p>
       <button className='saveButton' onClick={() => saveSong()}>Save</button>
@@ -244,5 +285,23 @@ export default Create
 
 
 
-//use focus for sound selection 
+//add empty audio for empty slots
 // use focus to be setTimeout for play button
+
+
+
+
+
+// console.log('chuild', rows[0].children.length > 0 ? 'yay' : 'empty')
+// console.log('chuild', rows[0].children.length)
+
+// //removes any children before creating the elements
+// if (rows[0].children.length > 0) {
+//   rows.forEach((row) => {
+//     console.log(row.hasChildNodes())
+//     while (row.hasChildNodes()) {
+//       console.log(row.firstElementChild)
+//       row.removeChild(row.firstChild)
+//     }
+//   })
+// }
