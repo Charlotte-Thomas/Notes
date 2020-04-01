@@ -128,7 +128,9 @@ const Edit = (props) => {
             b.classList.remove(classes.cell)
             b.innerHTML = note.innerHTML
             b.firstChild.src = note.attributes[1].value
-            console.log(b.firstChild.src)
+            // b.children[1].classList.remove('noteAudio')
+            b.children[1].removeAttribute('class')
+            console.log(b.children[1].attributes)
             updateGrid()
           }
         })
@@ -169,7 +171,8 @@ const Edit = (props) => {
         const audio = row[i].children[1]
         if (audio) {
           times.push(i)
-          ids.push(getIds(audio.attributes[1].value))
+          console.log(audio.attributes)
+          ids.push(getIds(audio.attributes[0].value))
         } else {
           ids.push(0)
         }
@@ -181,6 +184,7 @@ const Edit = (props) => {
   }
 
   function handleInput(e) {
+    setName(e.target.value)
     errors.title = ''
     updateForm(e.target.value)
   }
@@ -323,9 +327,13 @@ const Edit = (props) => {
       <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
 
       <p className='error'>{errors.notes}</p>
-      <button className='saveButton' onClick={() => saveSong()}>Save</button>
+      <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
     </div>
   )
 }
 
 export default Edit
+
+
+// different to create page:
+// removed class attribute from each song element so that line 175 gets the audio src not a 'class'
