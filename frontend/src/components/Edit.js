@@ -22,25 +22,7 @@ const useStyles = makeStyles(() => ({
 const Edit = (props) => {
 
   const [data, setData] = useState([])
-  // const [sectionNum, setSections] = useState([])
-
-
-  useEffect(() => {
-    // console.log(props.match.params.id)
-    fetch(`/api/songs/${props.match.params.id}`)
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(Math.ceil(resp.notes.length / 10))
-        setData(resp)
-      })
-    return () => console.log('Unmounting component')
-  }, [props.match.params.id])
-
-
-
-
-  // ----------------------------------------------
-
+  const [songName, setName] = useState('')
   const classes = useStyles()
 
   const [notes, setNotes] = useState([])
@@ -67,13 +49,59 @@ const Edit = (props) => {
       .then(resp => resp.json())
       .then(resp => {
         setNotes(resp)
+        console.log(resp)
+        return resp
       })
-      .then(() => {
+      .then((resp) => {
         setButtons(document.querySelectorAll('.noteButton'))
         createSubSecs()
+        return resp
+      })
+      .then((data) => {
+        fetch(`/api/songs/${props.match.params.id}`)
+          .then(resp => resp.json())
+          .then(resp => {
+            console.log(Math.ceil(resp.notes.length / 10))
+            const sectionNUm = Math.ceil(resp.notes.length / 10)
+            setName(resp.title)
+            setData(resp)
+            console.log('songData', resp.notes)
+            for (let i = 1; i < sectionNUm; i++) {
+              addNewSection()
+            }
+            placeNotes(resp.notes, data)
+          })
       })
     return () => console.log('Unmounting component')
-  }, [])
+  }, [0])
+
+
+  function placeNotes(data, Allnotes) {
+    console.log('boop', Allnotes)
+    console.log('GRID', grid)
+    Allnotes.forEach((note, i) => {
+      data.forEach((noteArray, x) => {
+        noteArray.forEach((noteId, y) => {
+          if (noteId === note.id) {
+            console.log('match', note.note)
+            //have to create a p element because when selecting notes changing the innerHTML adds one anyway
+            const p = document.createElement('p')
+            grid[y][x].insertBefore(p, grid[y][x].childNodes[0])
+            grid[y][x].style.background = colors[i + 1]
+            grid[y][x].classList.remove(classes.cell)
+            grid[y][x].children[1].src = note.sound_file
+            grid[y][x].firstChild.innerHTML = note.note
+            // console.log('firstchild', grid[y][x].children)
+          }
+        })
+      })
+    })
+    updateGrid()
+    console.log('GRID AFTER', grid)
+  }
+
+
+  // ----------------------------------------------
 
   function playNote(id) {
     const audio = document.getElementsByClassName('noteAudio')[id]
@@ -96,10 +124,11 @@ const Edit = (props) => {
             updateGrid()
           } else {
             b.style.background = colors[i]
-            b.classList.add(classes.colors)
+            // b.classList.add(classes.colors)
             b.classList.remove(classes.cell)
             b.innerHTML = note.innerHTML
             b.firstChild.src = note.attributes[1].value
+            console.log(b.firstChild.src)
             updateGrid()
           }
         })
@@ -189,7 +218,7 @@ const Edit = (props) => {
   // ---------- Grid Creation ------------
 
   function createSubSecs(newRows) {
-    console.log(newRows)
+    // console.log(newRows)
     let newClass = '.row'
     if (newRows) {
       newClass = newRows
@@ -231,7 +260,7 @@ const Edit = (props) => {
   }
 
   function updateGrid() {
-    console.log('rowwidth', rowWidth)
+    // console.log('rowwidth', rowWidth)
     grid.splice(0, grid.length)
     const sections = document.querySelectorAll('.player')
     for (let y = 0; y < 3; y++) {
@@ -269,10 +298,10 @@ const Edit = (props) => {
 
   return (
     <div className='createPage centerCol'>
-      <h1 className='createTitle'> Music Creator </h1>
+      <h1 className='createTitle'> Song Editor </h1>
       <div className='centerCol'>
         <h2>Name of song:</h2>
-        <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
+        <input onChange={(e) => handleInput(e)} value={songName} placeholder='Enter a song title'></input>
         <p className='error'>{errors.title}</p>
       </div>
       <div className="soundSelection centerCol">
