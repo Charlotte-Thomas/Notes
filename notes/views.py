@@ -119,6 +119,56 @@ class SingleSongView(APIView):
         serializer = SongSerializer(song)
         song.delete()
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        # will update the song file with new file if title is same name otherwise will create new file with diffrent title as name
+        song = Song.objects.get(pk=pk)
+
+        allNotes = Note.objects.get(pk=1)
+
+        allColumns = []
+        array = request.data['notes'] 
+        my_save = os.path.join(notes_root, request.data['title'] + '.wav')
+        for note in array:
+          notes = []
+          for audio in note: # always 3 MAX (num of rows)
+            if audio:
+              currentNote = Note.objects.get(pk=audio)
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4]
+              notes.append(url)
+
+          audioSegs = []
+          for file in notes:
+            my_file = os.path.join(notes_root, file)
+            sound = AudioSegment.from_wav(my_file)
+            audioSegs.append(sound)
+
+          if len(audioSegs) > 0:  
+            for i in range(len(audioSegs)):
+              if i != len(audioSegs) - 1:
+                overlayed = audioSegs[i].overlay(audioSegs[i + 1])
+                audioSegs[i + 1] = overlayed
+            allColumns.append(audioSegs[len(audioSegs) - 1])
+
+        if len(allColumns) > 0:
+          for i in range(len(allColumns)):
+            if i != len(allColumns) - 1:
+              added = allColumns[i] + allColumns[i + 1]
+              allColumns[i + 1] = added
+   
+          final_sound = allColumns[len(allColumns) - 1]
+          final_sound.duration_seconds == 150
+          final_sound.export(my_save, format="wav")
+        
+        request.data['song_file'] = '/api/media/notes/' + request.data['title'] + '.wav'
+
+
+        updated_song = SongSerializer(song, data=request.data)
+        print('UPDATED', updated_song)
+        if (updated_song.is_valid()):
+            updated_song.save()
+            return Response(updated_song.data)
+        return Response(updated_song.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
     
 
 class SingleUserView(APIView):

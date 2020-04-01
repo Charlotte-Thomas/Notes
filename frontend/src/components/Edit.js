@@ -64,6 +64,7 @@ const Edit = (props) => {
             console.log(Math.ceil(resp.notes.length / 10))
             const sectionNUm = Math.ceil(resp.notes.length / 10)
             setName(resp.title)
+            updateForm(resp.title)
             setData(resp)
             console.log('songData', resp.notes)
             for (let i = 1; i < sectionNUm; i++) {
@@ -219,6 +220,22 @@ const Edit = (props) => {
       })
   }
 
+  function updateSong() {
+    getValues()
+    console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
+    axios.put(`/api/songs/${props.match.params.id}/`, { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => console.log(resp.response.data))
+      .catch((err) => {
+        console.log(err.response.data)
+        setError({
+          'title': err.response.data.title ? err.response.data.title[0] : '',
+          'notes': err.response.data.notes ? 'add some notes first!' : ''
+        })
+      })
+  }
+
   // ---------- Grid Creation ------------
 
   function createSubSecs(newRows) {
@@ -327,7 +344,10 @@ const Edit = (props) => {
       <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
 
       <p className='error'>{errors.notes}</p>
-      <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
+      {/* <div> */}
+        <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
+        <button className='saveButton' onClick={() => updateSong()}>Update song</button>
+      {/* </div> */}
     </div>
   )
 }

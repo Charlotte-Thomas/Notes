@@ -24,7 +24,7 @@ const Gallery = (props) => {
         getArtist(resp)
       })
     return () => console.log('Unmounting component')
-  }, [0])
+  }, [2])
 
   function getArtist(songs) {
     const array = []
@@ -60,3 +60,9 @@ const Gallery = (props) => {
 
 
 export default Gallery
+
+
+//NOTE:
+// edited songs that did NOT change the song title: the file played here will not update straight away 
+//- takes a little while to realise the audio file has changes - perhaps it stores the audio file in memory in browser?
+// if title is changed then a new audio file is made so this page WILL update to that file straight away
