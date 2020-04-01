@@ -9,6 +9,7 @@ import Register from './components/Register'
 import Create from './components/Create'
 import NavBar from './components/NavBar'
 import Gallery from './components/Gallery'
+import Edit from './components/Edit'
 
 const App = () => (
 
@@ -18,6 +19,7 @@ const App = () => (
       <Route exact path='/' component={Login} />
       <Route exact path='/register' component={Register} />
       <Route exact path='/create' component={Create} />
+      <Route exact path='/edit/:id' component={Edit} />
       <Route exact path='/gallery' component={Gallery} />
     </Switch>
   </BrowserRouter>
