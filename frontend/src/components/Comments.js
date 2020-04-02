@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Auth from '../lib/auth'
+const moment = require('moment')
 
 
 const Comments = (props) => {
@@ -47,11 +48,34 @@ const Comments = (props) => {
       <div>
         <h3>{names[id]}</h3>
         <p>{comment.text}</p>
-        <p>{comment.time_stamp}</p>
+        <div>{configTime(comment.time_stamp)}</div>
       </div>
     )
-
   }
+
+  function configTime(time) {
+    if (time) {
+      console.log(time)
+      const split1 = (time).split('.')
+      split1.pop()
+      const split2 = split1.join('').split('T')
+      const split3 = split2[1].split(':')
+      split3.pop()
+      split2.pop()
+      const split4 = split3.join(':')
+      split2.push(split4)
+      console.log(split2)
+      return (
+        <div>
+          <p>{split2[0]}</p>
+          <p>{split2[1]}</p>
+        </div>
+      )
+    }
+  }
+
+  configTime()
+
 
   return (
     <div className="commentSection">
