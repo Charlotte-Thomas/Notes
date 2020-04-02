@@ -287,6 +287,7 @@ export default Create
 
 //add empty audio for empty slots
 // use focus to be setTimeout for play button
+//allow users to add comments? allow artist to make notes?
 
 
 

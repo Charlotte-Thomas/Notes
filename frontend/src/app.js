@@ -10,6 +10,7 @@ import Create from './components/Create'
 import NavBar from './components/NavBar'
 import Gallery from './components/Gallery'
 import Edit from './components/Edit'
+import Profile from './components/Profile'
 
 const App = () => (
 
@@ -21,6 +22,7 @@ const App = () => (
       <Route exact path='/create' component={Create} />
       <Route exact path='/edit/:id' component={Edit} />
       <Route exact path='/gallery' component={Gallery} />
+      <Route exact path='/profile' component={Profile} />
     </Switch>
   </BrowserRouter>
 )
