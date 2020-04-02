@@ -37,10 +37,11 @@ const Profile = (props) => {
 
   function findSongs(song, id) {
     if (song.user === Auth.getUserId()) {
-      console.log(song.title)
+      console.log(song.title.split('_').join(' '))
+      const titleFix = song.title.split('_').join(' ')
       return <div className="centerCol width">
         <div className="centerCol width">
-          <h2 className="songTitle">{song.title}</h2>
+          <h2 className="songTitle">{titleFix}</h2>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />
           </ThemeProvider>
@@ -48,7 +49,7 @@ const Profile = (props) => {
         <br />
         <div>
           <Link to={`/edit/${song.id}`}><button>Edit Song</button></Link>
-          <Link to={`/edit/${song.id}`}><button>See Comments</button></Link>
+          <Link to={`/edit/${song.id}`}><button>More details</button></Link>
         </div>
         <br />
       </div>

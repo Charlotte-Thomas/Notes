@@ -47,7 +47,7 @@ const Gallery = (props) => {
       <h1 className="galleryTitle">Music Gallery</h1>
       <div className='centerCol allCards width'> {data.map((song, id) => {
         return <div className='card centerCol' key={id}>
-          <h2 className='title'>{song.title}</h2>
+          <h2 className='title'>{song.title.split('_').join(' ')}</h2>
           <h3 className='artist'>Artist: {artists[id]}</h3>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />

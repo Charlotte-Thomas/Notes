@@ -153,6 +153,13 @@ const Create = (props) => {
   function saveSong() {
     getValues()
     console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
+    if (times.length === 0) {
+      console.log('blah')
+      setError({
+        'notes': 'add some notes first!'
+      })
+      return
+    }
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -252,11 +259,11 @@ const Create = (props) => {
   return (
     <div className='createPage centerCol'>
       <h1 className='createTitle'> Music Creator </h1>
-      <div className='centerCol'>
-        <h2>Name of song:</h2>
+      <div className='songInput centerCol'>
+        {/* <h2>Name of song:</h2> */}
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
-        <p className='error'>{errors.title}</p>
       </div>
+      <p className='error'>{errors.title}</p>
       <div className="soundSelection centerCol">
         <h3>Sound Selection</h3>
         <div className='noteButton clearButton centerRow'>clear</div>
@@ -291,6 +298,9 @@ export default Create
 //load icon
 //other songs by that artist in gallery
 //search function in gallery by artist and song name
+// day song was created
+//ratings
+//song genres
 
 
 

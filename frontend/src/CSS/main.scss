@@ -1,12 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Indie+Flower|Odibee+Sans&display=swap");
 
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  // height: 100%;
+  padding: 0;
+  height: 100%;
 }
 
 #root {
-  // height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .centerRow {
@@ -29,6 +37,8 @@ body {
   width: 100%;
 }
 
+// --------- create Page --------------------
+
 .createPage {
   height: 100%;
   background: #cfd8dc;
@@ -39,6 +49,19 @@ body {
 .createTitle {
   font-size: 70px;
   margin: 20px;
+}
+
+.songInput {
+  width: 30%;
+  background: grey;
+  padding: 20px 0;
+
+    input {
+
+      &:focus {
+        outline: none;
+      }
+    }
 }
 
 .soundSelection {

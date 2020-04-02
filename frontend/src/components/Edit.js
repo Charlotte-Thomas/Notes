@@ -324,7 +324,7 @@ const Edit = (props) => {
       <h1 className='createTitle'> Song Editor </h1>
       <div className='centerCol'>
         <h2>Name of song:</h2>
-        <input onChange={(e) => handleInput(e)} value={songName} placeholder='Enter a song title'></input>
+        <input onChange={(e) => handleInput(e)} value={songName.split('_').join(' ')} placeholder='Enter a song title'></input>
         <p className='error'>{errors.title}</p>
       </div>
       <div className="soundSelection centerCol">
