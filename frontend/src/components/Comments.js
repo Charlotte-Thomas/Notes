@@ -6,9 +6,15 @@ const moment = require('moment')
 
 const Comments = (props) => {
 
+  const errorInitialState = {
+    errors: ''
+  }
+
   const [comments, setComments] = useState([])
   const [names, setNames] = useState([])
-  const [error, setError] = useState()
+  const [form, updateForm] = useState()
+  const [error, setError] = useState(errorInitialState)
+  const [reload, setReload] = useState(0)
 
   useEffect(() => {
     fetch('/api/comments/')
@@ -24,7 +30,7 @@ const Comments = (props) => {
         getUsernames(commentArray)
       })
     return () => console.log('Unmounting component')
-  }, [0])
+  }, [reload])
 
 
   function getUsernames(com) {
@@ -45,17 +51,16 @@ const Comments = (props) => {
   function mapComments(comment, id) {
     // console.log('names', names[0])
     return (
-      <div>
+      <div className='width centerCol'>
         <h3>{names[id]}</h3>
+        <div className='width centerRow'>{configTime(comment.time_stamp)}</div>
         <p>{comment.text}</p>
-        <div>{configTime(comment.time_stamp)}</div>
       </div>
     )
   }
 
   function configTime(time) {
     if (time) {
-      console.log(time)
       const split1 = (time).split('.')
       split1.pop()
       const split2 = split1.join('').split('T')
@@ -64,9 +69,8 @@ const Comments = (props) => {
       split2.pop()
       const split4 = split3.join(':')
       split2.push(split4)
-      console.log(split2)
       return (
-        <div>
+        <div className="centerRow width">
           <p>{split2[0]}</p>
           <p>{split2[1]}</p>
         </div>
@@ -74,18 +78,39 @@ const Comments = (props) => {
     }
   }
 
-  configTime()
+  function handleInput(e) {
+    updateForm(e.target.value)
+  }
+
+  function postComment() {
+    const song = parseFloat(props.props.match.params.id)
+    axios.post('/api/comments/', { 'song': song, 'text': form }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => console.log(resp.data))
+      .catch((err) => {
+        console.log(err.response.data)
+        setError({
+          'errors': err.response.data ? err.response.text : ''
+        })
+      })
+      .then(() => {
+        setReload(1)
+        updateForm('')
+      })
+  }
 
 
   return (
-    <div className="commentSection">
-      <div className="songDiv centerRow width"> {comments.map((comment, id) => {
-        return <div className="card centerCol" key={id}>
+    <div className="commentSection width centerCol">
+      <div className="commentDiv centerRow width"> {comments.map((comment, id) => {
+        return <div className="centerCol width" key={id}>
           {mapComments(comment, id)}
         </div>
       })}
       </div>
-      <input></input>
+      <input onKeyPress={((e) => e.key === 'Enter' ? postComment() : null)} onChange={(e) => handleInput(e)} value={form ? form : ''} placeholder='Add a comment'></input>
+      <p>{error.errors}</p>
     </div>
   )
 
