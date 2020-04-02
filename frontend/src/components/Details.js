@@ -5,7 +5,7 @@ import Auth from '../lib/auth'
 import { createMuiTheme } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import AudioPlayer from 'material-ui-audio-player'
-import Comments from './CommentSection'
+import Comments from './Comments'
 
 const muiTheme = createMuiTheme({})
 
@@ -30,7 +30,7 @@ const Details = (props) => {
 
 
   function updateComments(comment) {
-    console.log(comment)
+    // console.log(comment)
     comments.push(comment)
   }
 
@@ -41,7 +41,6 @@ const Details = (props) => {
       <h1 className="profileHeader">{title}</h1>
       <div className="width centerCol">
         <ThemeProvider theme={muiTheme}>
-          {console.log(data.song_file)}
           <AudioPlayer src={audio} />
         </ThemeProvider>
       </div>
@@ -49,7 +48,7 @@ const Details = (props) => {
       {data.user === Auth.getUserId() && <div>
         <Link to={`/edit/${data.id}`}><button>Edit Song</button></Link>
       </div>}
-      <Comments data={data} updateComments={resp => updateComments(resp)} />
+      <Comments props={props} data={data} updateComments={resp => updateComments(resp)} />
     </div>
 
   )
