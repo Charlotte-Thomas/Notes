@@ -13,8 +13,8 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Note, Song, User
-from .serializers import NoteSerializer, SongSerializer, UserSerializer
+from .models import Note, Song, User, Comment
+from .serializers import NoteSerializer, SongSerializer, UserSerializer, CommentSerializer
 
 import ffmpeg
 from pydub import AudioSegment
@@ -37,6 +37,22 @@ class NoteView(APIView):
         notes = Note.objects.all()
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
+
+
+class CommentView(APIView):
+    def get(self, request):
+        comment = Comment.objects.all()
+        serializer = CommentSerializer(comment, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        request.data['user'] = request.user.id
+        comment = CommentSerializer(data=request.data)
+        if comment.is_valid():
+            comment.save()
+            return Response(comment.data, status=HTTP_201_CREATED)
+        return Response(comment.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
 
 class SongView(APIView):
     # permission_classes = [IsAuthenticated]

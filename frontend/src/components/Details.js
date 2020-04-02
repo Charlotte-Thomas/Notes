@@ -5,6 +5,7 @@ import Auth from '../lib/auth'
 import { createMuiTheme } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import AudioPlayer from 'material-ui-audio-player'
+import Comments from './CommentSection'
 
 const muiTheme = createMuiTheme({})
 
@@ -13,6 +14,7 @@ const Details = (props) => {
   const [data, setData] = useState([])
   const [title, setTitle] = useState([])
   const [audio, setAudio] = useState([])
+  const [comments, setComment] = useState([])
 
   useEffect(() => {
     fetch(`/api/songs/${props.match.params.id}`)
@@ -25,6 +27,13 @@ const Details = (props) => {
       })
     return () => console.log('Unmounting component')
   }, [0])
+
+
+  function updateComments(comment) {
+    console.log(comment)
+    comments.push(comment)
+  }
+
 
 
   return (
@@ -40,7 +49,9 @@ const Details = (props) => {
       {data.user === Auth.getUserId() && <div>
         <Link to={`/edit/${data.id}`}><button>Edit Song</button></Link>
       </div>}
+      <Comments data={data} updateComments={resp => updateComments(resp)} />
     </div>
+
   )
 
 }

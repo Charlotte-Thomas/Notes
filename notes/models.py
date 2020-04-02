@@ -11,6 +11,7 @@ class Note(models.Model):
 
     def __str__(self):
         return f'{self.note} - {self.sound_file}'
+   
 
 class Song(models.Model):
     title = models.CharField(max_length=60, unique=True)
@@ -22,3 +23,13 @@ class Song(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name='notes1', on_delete=models.CASCADE, null=True)
+    song = models.ForeignKey(Song, related_name='notes1', on_delete=models.DO_NOTHING, null=True)
+    text = models.CharField(max_length=200, blank=False, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return f'{self.text} - {self.time_stamp}'
