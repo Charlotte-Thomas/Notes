@@ -25,6 +25,10 @@ body {
   /* background: blue; */
 }
 
+.width {
+  width: 100%;
+}
+
 .createPage {
   height: 100%;
   background: #cfd8dc;
@@ -236,4 +240,24 @@ input {
       -webkit-box-shadow: 0 0 0 30px #78909c inset !important;
   }
 
+}
+
+// ------------- Profile ------------------
+
+.profile {
+  h1 {
+    font-size: 70px;
+  }
+}
+
+.songDiv {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 21%;
+  
+  // min-width: 300px;
+  // max-width: 300px;
 }

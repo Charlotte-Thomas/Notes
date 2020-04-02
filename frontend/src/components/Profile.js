@@ -38,15 +38,18 @@ const Profile = (props) => {
   function findSongs(song, id) {
     if (song.user === Auth.getUserId()) {
       console.log(song.title)
-      return <div className="card">
-        <div>
+      return <div className="centerCol width">
+        <div className="centerCol width">
           <h2 className="songTitle">{song.title}</h2>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />
           </ThemeProvider>
         </div>
         <br />
-        <Link to={`/edit/${id}`}><button>Edit Song</button></Link>
+        <div>
+          <Link to={`/edit/${song.id}`}><button>Edit Song</button></Link>
+          <Link to={`/edit/${song.id}`}><button>See Comments</button></Link>
+        </div>
         <br />
       </div>
     }
@@ -54,10 +57,10 @@ const Profile = (props) => {
 
 
   return (
-    <div className="profile">
+    <div className="profile centerCol">
       <h1 className="profileHeader">Your Discography</h1>
-      <div className="songDiv"> {data.map((song, id) => {
-        return <div key={id}>
+      <div className="songDiv centerRow width"> {data.map((song, id) => {
+        return <div className="card centerCol" key={id}>
           {findSongs(song, id)}
         </div>
       })}

@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
 
 const Edit = (props) => {
 
+
   const [data, setData] = useState([])
   const [songName, setName] = useState('')
   const classes = useStyles()
@@ -45,6 +46,7 @@ const Edit = (props) => {
   })
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetch('/api/notes/')
       .then(resp => resp.json())
       .then(resp => {
