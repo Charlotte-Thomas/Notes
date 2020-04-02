@@ -12,7 +12,6 @@ const muiTheme = createMuiTheme({})
 const Profile = (props) => {
 
   const [data, setData] = useState([])
-  const [answer, setAnswer] = useState([])
 
   useEffect(() => {
     fetch('/api/songs/')
@@ -49,7 +48,7 @@ const Profile = (props) => {
         <br />
         <div>
           <Link to={`/edit/${song.id}`}><button>Edit Song</button></Link>
-          <Link to={`/edit/${song.id}`}><button>More details</button></Link>
+          <Link to={`/details/${song.id}`}><button>More details</button></Link>
         </div>
         <br />
       </div>

@@ -154,7 +154,6 @@ const Create = (props) => {
     getValues()
     console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
     if (times.length === 0) {
-      console.log('blah')
       setError({
         'notes': 'add some notes first!'
       })

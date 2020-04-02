@@ -11,6 +11,7 @@ import NavBar from './components/NavBar'
 import Gallery from './components/Gallery'
 import Edit from './components/Edit'
 import Profile from './components/Profile'
+import Details from './components/Details'
 
 const App = () => (
 
@@ -23,6 +24,7 @@ const App = () => (
       <Route exact path='/edit/:id' component={Edit} />
       <Route exact path='/gallery' component={Gallery} />
       <Route exact path='/profile' component={Profile} />
+      <Route exact path='/details/:id' component={Details} />
     </Switch>
   </BrowserRouter>
 )
