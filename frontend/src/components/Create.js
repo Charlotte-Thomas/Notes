@@ -162,7 +162,7 @@ const Create = (props) => {
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.response.data))
+      .then((resp) => console.log(resp.data))
       .catch((err) => {
         console.log(err.response.data)
         setError({
@@ -250,13 +250,17 @@ const Create = (props) => {
     player.appendChild(node)
     setWidth(rowWidth + 10)
     createSubSecs(`.${newClass}`)
+
+    //fixes height sizing issue:
+    const createPage = document.querySelector('.createPage')
+    createPage.classList.remove('viewHeight')
   }
 
 
 
 
   return (
-    <div className='createPage centerCol'>
+    <div className='createPage viewHeight centerCol'>
       <h1 className='createTitle'> Music Creator </h1>
       <div className='songInput centerCol'>
         {/* <h2>Name of song:</h2> */}
@@ -274,9 +278,9 @@ const Create = (props) => {
       <div className='playingBlocks centerRow'>
         <button className='playButton' onClick={() => playSong()}></button>
         <section className='player'>
-          <div className='row centerRow' id='row0'></div>
-          <div className='row centerRow' id='row1'></div>
-          <div className='row centerRow' id='row2'></div>
+          <div className='row centerRow'></div>
+          <div className='row centerRow'></div>
+          <div className='row centerRow'></div>
         </section>
       </div>
       <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
