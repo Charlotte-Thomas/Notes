@@ -318,6 +318,20 @@ const Edit = (props) => {
     createSubSecs(`.${newClass}`)
   }
 
+  function deleteSong() {
+    axios.delete(`/api/songs/${props.match.params.id}/`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => console.log(resp))
+      .catch((err) => {
+        console.log(err.response.data)
+        setError({
+          'notes': err.response.data ? 'unauthorised!' : ''
+        })
+      })
+      .then(() => props.history.push('/profile'))
+  }
+
 
   return (
     <div className='createPage centerCol'>
@@ -346,11 +360,12 @@ const Edit = (props) => {
       <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
 
       <p className='error'>{errors.notes}</p>
-      {/* <div> */}
+      {Auth.getUserId() === data.user && <div className='centerRow width'>
         <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
-        <button className='saveButton' onClick={() => updateSong()}>Update song</button>
-      {/* </div> */}
-    </div>
+        <button className='saveButton' onClick={() => updateSong()}>Update</button>
+        <button className='saveButton' onClick={() => deleteSong()}>Delete</button>
+      </div>}
+    </div> 
   )
 }
 
