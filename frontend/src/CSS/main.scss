@@ -296,10 +296,21 @@ input {
   // max-width: 300px;
 }
 
+// ----------- detail ------------------
+
+.detailPlayer {
+  width: 40%;
+}
 
 
 // --------- comments -----------------
 
+.commentSection {
+  min-height: 300px;
+  width: 80%;
+  background: green;
+}
+
 .commentDiv {
-  
+  flex-wrap: wrap;
 }

@@ -37,6 +37,7 @@ const Edit = (props) => {
   const [noteIds, setNoteIds] = useState([])
 
   const [rowWidth, setWidth] = useState(10)
+  const [text, setText] = useState('Delete')
 
   const initialErrorState = { 'title': '', 'notes': '' }
 
@@ -318,6 +319,13 @@ const Edit = (props) => {
     createSubSecs(`.${newClass}`)
   }
 
+  function makeSure(text) {
+    if (text === 'Are you sure') {
+      deleteSong()
+    }
+    setText('Are you sure')
+  }
+
   function deleteSong() {
     axios.delete(`/api/songs/${props.match.params.id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -363,7 +371,7 @@ const Edit = (props) => {
       {Auth.getUserId() === data.user && <div className='centerRow width'>
         <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
         <button className='saveButton' onClick={() => updateSong()}>Update</button>
-        <button className='saveButton' onClick={() => deleteSong()}>Delete</button>
+        <button className='saveButton' onClick={() => makeSure(text)}>{text}</button>
       </div>}
     </div> 
   )

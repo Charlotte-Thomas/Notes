@@ -162,14 +162,16 @@ const Create = (props) => {
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.data))
-      .catch((err) => {
-        console.log(err.response.data)
+      // .then((resp) => console.log(resp.data))
+      .catch((err, resp) => {
+        // console.log(err.response.data)
         setError({
           'title': err.response.data.title ? err.response.data.title[0] : '',
           'notes': err.response.data.notes ? 'add some notes first!' : ''
         })
+        return resp
       })
+      .then((resp) => resp ? props.history.push(`/edit/${resp.data.id}`) : null)
   }
 
   // ---------- Grid Creation ------------

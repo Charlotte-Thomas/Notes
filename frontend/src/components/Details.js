@@ -15,6 +15,7 @@ const Details = (props) => {
   const [title, setTitle] = useState([])
   const [audio, setAudio] = useState([])
   const [comments, setComment] = useState([])
+  const [artist, setArtist] = useState()
 
   useEffect(() => {
     fetch(`/api/songs/${props.match.params.id}`)
@@ -24,22 +25,31 @@ const Details = (props) => {
         setData(resp)
         setTitle(resp.title.split('_').join(' '))
         setAudio(resp.song_file)
+        getUser(resp.user)
       })
     return () => console.log('Unmounting component')
   }, [0])
 
 
-  function updateComments(comment) {
-    // console.log(comment)
-    comments.push(comment)
+  function getUser(user) {
+    fetch(`/api/users/${user}`)
+      .then(resp => resp.json())
+      .then((resp) => {
+        console.log(resp.username)
+        setArtist(resp.username) 
+      })
   }
 
+  function updateComments(comment) {
+    comments.push(comment)
+  }
 
 
   return (
     <div className="profile centerCol">
       <h1 className="profileHeader">{title}</h1>
-      <div className="width centerCol">
+      <h2>Artist: {artist}</h2>
+      <div className="detailPlayer centerCol">
         <ThemeProvider theme={muiTheme}>
           <AudioPlayer src={audio} />
         </ThemeProvider>

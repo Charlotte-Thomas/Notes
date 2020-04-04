@@ -51,7 +51,7 @@ const Comments = (props) => {
   function mapComments(comment, id) {
     // console.log('names', names[0])
     return (
-      <div className='width centerCol'>
+      <div className=' centerRow'>
         <h3>{names[id]}</h3>
         <div className='width centerRow'>{configTime(comment.time_stamp)}</div>
         <p>{comment.text}</p>
@@ -95,7 +95,7 @@ const Comments = (props) => {
         })
       })
       .then(() => {
-        setReload(1)
+        setReload(reload + 1)
         updateForm('')
       })
   }
@@ -103,8 +103,8 @@ const Comments = (props) => {
 
   return (
     <div className="commentSection width centerCol">
-      <div className="commentDiv centerRow width"> {comments.map((comment, id) => {
-        return <div className="centerCol width" key={id}>
+      <div className="commentDiv centerRow"> {comments.map((comment, id) => {
+        return <div className="width centerRow" key={id}>
           {mapComments(comment, id)}
         </div>
       })}
