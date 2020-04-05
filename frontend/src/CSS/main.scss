@@ -1,14 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Indie+Flower|Odibee+Sans&display=swap");
 
 
-// * {
-//   box-sizing: border-box;
-// }
+// ------- VARIABLES ---------
 
-html {
-  // min-height: 100%;
-  // overflow: auto;
-}
+$blue50:  #eceff1;
+$blue100: #cfd8dc;
+$blue200: #b0bec5;
+$blue300: #90a4ae;
+$blue400: #78909c;
+$blue500: #607d8b;
+$blue600: #546e7a;
+$blue700: #455a64;
+$blue800: #37474f;
+$blue900: #263238;
+
+
+
+
 
 body {
   margin: 0;
@@ -49,11 +57,13 @@ body {
 
 // --------- create Page --------------------
 
+// #efdab9
+
 .createPage {
   // height: 100%;
-  background: #cfd8dc;
+  background: $blue800;
   justify-content: flex-start;
-  color: #253238;
+  color: $blue100;
 }
 
 
@@ -167,10 +177,6 @@ body {
 }
 
 .subSec {
-  // width: 33.3%;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
   flex: 1;
   // width: 10%;
   height: 100%;
@@ -178,6 +184,8 @@ body {
   border: 1px solid black;
   text-align: center;
   cursor: pointer;
+  // border-radius: 10%;
+  // margin: 1px;
 }
 
 .addRowsButton {
