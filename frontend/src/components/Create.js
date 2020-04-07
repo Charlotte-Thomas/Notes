@@ -270,7 +270,7 @@ const Create = (props) => {
       </div>
       <p className='error'>{errors.title}</p>
       <div className="soundSelection centerCol">
-        <h3>Sound Selection</h3>
+        <h2>Sound Selection</h2>
         <div className='noteButton clearButton centerRow'>clear</div>
         <div className='noteButtons centerRow'>{notes.map((n, id) => {
           return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
