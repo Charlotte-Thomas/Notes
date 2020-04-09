@@ -269,6 +269,7 @@ const Create = (props) => {
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
       </div>
       <p className='error'>{errors.title}</p>
+      
       <div className="soundSelection centerCol">
         <h2>Sound Selection</h2>
         <div className='noteButton clearButton centerRow'>clear</div>
@@ -308,19 +309,6 @@ export default Create
 //song genres
 
 
+//height still not fixed
 
 
-
-// console.log('chuild', rows[0].children.length > 0 ? 'yay' : 'empty')
-// console.log('chuild', rows[0].children.length)
-
-// //removes any children before creating the elements
-// if (rows[0].children.length > 0) {
-//   rows.forEach((row) => {
-//     console.log(row.hasChildNodes())
-//     while (row.hasChildNodes()) {
-//       console.log(row.firstElementChild)
-//       row.removeChild(row.firstChild)
-//     }
-//   })
-// }
