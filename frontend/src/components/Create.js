@@ -8,14 +8,16 @@ import { withTheme } from '@material-ui/styles'
 
 const useStyles = makeStyles(() => ({
   cell: {
-    backgroundColor: 'lightseagreen',
-    opacity: 1,
-    '&:hover': {
-      opacity: 0.7
-    }
+    // backgroundColor: '#78909c',
+    backgroundColor: '#607d8b',
+    // backgroundColor: '#90a4ae',
+    opacity: 1
   },
   opacity: {
     opacity: 0.5
+  },
+  border: {
+    border: '1px solid #263238'
   }
 }))
 
@@ -60,7 +62,8 @@ const Create = (props) => {
     audio.play()
   }
 
-  const colors = ['grey', '#d66464', '#da965c', 'rgb(240, 225, 145)', 'rgb(133, 209, 180)', 'rgb(138, 245, 218)', 'rgb(138, 220, 245)']
+  const colors = ['grey', 'rgb(208, 86, 86)', '#da965c', 'rgb(240, 225, 145)', 'rgb(133, 209, 180)', 'rgb(95, 193, 156)', 'rgb(138, 220, 245)']
+  // const colors = ['grey', '#b0bec5', '#90a4ae', '#78909c', '#455a64', 'rgb(65, 83, 93)']
 
   buttons.forEach((note, i) => {
     note.style.background = colors[i]
@@ -76,6 +79,7 @@ const Create = (props) => {
             updateGrid()
           } else {
             b.style.background = colors[i]
+            // b.classList.add(classes.border)
             b.classList.add(classes.colors)
             b.classList.remove(classes.cell)
             b.innerHTML = note.innerHTML
@@ -279,7 +283,9 @@ const Create = (props) => {
       </div>
 
       <div className='playingBlocks centerRow'>
-        <button className='playButton' onClick={() => playSong()}></button>
+        {/* <div className='playbutton'> */}
+          <button className='playButton' onClick={() => playSong()}>{'>'}</button>
+        {/* </div> */}
         <section className='player'>
           <div className='row centerRow'></div>
           <div className='row centerRow'></div>

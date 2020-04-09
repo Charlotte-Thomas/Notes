@@ -14,8 +14,9 @@ $blue700: #455a64;
 $blue800: #37474f;
 $blue900: #263238;
 
-
-
+* {
+  box-sizing: border-box; 
+}
 
 
 body {
@@ -147,15 +148,15 @@ body {
 }
 
 .noteButton {
-  background: lightblue;
+  // background: lightblue;
   flex: 1;
   min-width: 100px;
   max-width: 100px;
   // padding: 5px;
   margin: 2px;
   cursor: pointer;
-  border: 2px solid black;
-  border-radius: 10%;
+  border: 3px solid $blue900;
+  border-radius: 12%;
 
   &:hover {
   opacity: 0.8;
@@ -173,15 +174,19 @@ body {
 
 .playButton {
   height: 200px;
-  border: 1px solid black;
+  border: 1px solid $blue300;
   border-right: none;
-  padding: 0 4%;
-  background-image: url('https://www.searchpng.com/wp-content/uploads/2019/02/Play-Free-PNG-Icon-715x673.png');
+  padding: 0 3%;
+  // background-image: url('https://www.searchpng.com/wp-content/uploads/2019/02/Play-Free-PNG-Icon-715x673.png');
+  // background-image: url('https://lh3.googleusercontent.com/proxy/pzOXzvfup8s695PAezo8JHGkal19EUYa69ArUip2mMvIcYZUDVohuz1gP2_T7yum2HNWYRVZdSev54oP0e7R-vqTOBg-h88lIfYS30mmeCrxKPt7yDUUvZ_ekZYG_KvVCIfpw0oy-aALcHy66FMl3DkgQf5YES0vYhmVpY59');
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #eceff1;
+  background-color: $blue700;
   cursor: pointer;
+
+  color: $blue50;
+  font-size: 40px;
 
   &:focus {
     outline: 0;
@@ -209,19 +214,24 @@ body {
 
 .subSec {
   flex: 1;
-  // width: 10%;
+  // color: $blue900;
   color: $blue900;
   height: 100%;
-  background: lightseagreen;
-  border: 1px solid black;
+  border: 1px solid $blue300;
   text-align: center;
   cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
   // border-radius: 10%;
   // margin: 1px;
+
 }
 
 .addRowsButton {
   padding: 15px;
+  background: $blue100;
   width: 5%;
   font-size: 30px;
   cursor: pointer;
@@ -236,7 +246,7 @@ body {
 }
 
 .addedRow {
-  padding-left: 10%;
+  margin-left: 10%;
 }
 
 input {
@@ -247,19 +257,23 @@ input {
 }
 
 .error {
-  color: red;
+  color: #bcffec;
 }
 
 .saveButton {
   padding: 15px;
   width: 10%;
-  background: rgb(184, 180, 180);
+  background: $blue200;
   cursor: pointer;
   font-size: 20px;
 
   &:focus {
     outline: 0;
     border: none;
+  }
+
+  &:hover {
+    opacity: 0.7;
   }
 }
 
