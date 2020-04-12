@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => ({
   },
   border: {
     border: '1px solid #263238'
+  },
+  playing: {
+    opacity: 0.6
   }
 }))
 
@@ -106,11 +109,15 @@ const Create = (props) => {
   function playSong() {
     // console.log('playgrdi', rowWidth)
     for (let i = 0; i < rowWidth; i++) {
-      setTimeout(() => {
-        grid.forEach((row) => {
+      grid.forEach((row) => {
+        setTimeout(() => {
           row[i].children[1] ? row[i].children[1].play() : null
-        })
-      }, i * 1000)
+          row[i].classList.add(classes.playing)
+          setTimeout(() => {
+            row[i].classList.remove(classes.playing)
+          }, 1000)
+        }, i * 1000)
+      })
     }
   }
 
@@ -273,7 +280,7 @@ const Create = (props) => {
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
       </div>
       <p className='error'>{errors.title}</p>
-      
+
       <div className="soundSelection centerCol">
         <h2>Sound Selection</h2>
         <div className='noteButton clearButton centerRow'>clear</div>
@@ -284,7 +291,7 @@ const Create = (props) => {
 
       <div className='playingBlocks centerRow'>
         {/* <div className='playbutton'> */}
-          <button className='playButton' onClick={() => playSong()}>{'>'}</button>
+        <button className='playButton' onClick={() => playSong()}>{'>'}</button>
         {/* </div> */}
         <section className='player'>
           <div className='row centerRow'></div>
