@@ -44,8 +44,8 @@ const Gallery = (props) => {
 
   return (
     <div className="galleryPage centerCol">
-      <h1 className="galleryTitle">Music Gallery</h1>
-      <div className='centerCol allCards width'> {data.map((song, id) => {
+      <h1 className="galleryTitle createTitle">Music Gallery</h1>
+      <div className='centerRow allCards width'> {data.map((song, id) => {
         return <div className='card centerCol' key={id}>
           <h2 className='title'>{song.title.split('_').join(' ')}</h2>
           <h3 className='artist'>Artist: {artists[id]}</h3>
