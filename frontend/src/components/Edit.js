@@ -7,7 +7,7 @@ import { withTheme } from '@material-ui/styles'
 
 const useStyles = makeStyles(() => ({
   cell: {
-    backgroundColor: 'lightseagreen',
+    backgroundColor: '#607d8b',
     opacity: 1,
     '&:hover': {
       opacity: 0.7
@@ -15,6 +15,9 @@ const useStyles = makeStyles(() => ({
   },
   opacity: {
     opacity: 0.5
+  },
+  playing: {
+    opacity: 0.6
   }
 }))
 
@@ -157,11 +160,15 @@ const Edit = (props) => {
   function playSong() {
     // console.log('playgrdi', rowWidth)
     for (let i = 0; i < rowWidth; i++) {
-      setTimeout(() => {
-        grid.forEach((row) => {
+      grid.forEach((row) => {
+        setTimeout(() => {
           row[i].children[1] ? row[i].children[1].play() : null
-        })
-      }, i * 1000)
+          row[i].classList.add(classes.playing)
+          setTimeout(() => {
+            row[i].classList.remove(classes.playing)
+          }, 1000)
+        }, i * 1000)
+      })
     }
   }
 
@@ -317,6 +324,9 @@ const Edit = (props) => {
     player.appendChild(node)
     setWidth(rowWidth + 10)
     createSubSecs(`.${newClass}`)
+
+    const createPage = document.querySelector('.createPage')
+    createPage.classList.remove('viewHeight')
   }
 
   function makeSure(text) {
@@ -342,15 +352,15 @@ const Edit = (props) => {
 
 
   return (
-    <div className='createPage centerCol'>
+    <div className='createPage viewHeight centerCol'>
       <h1 className='createTitle'> Song Editor </h1>
-      <div className='centerCol'>
-        <h2>Name of song:</h2>
+      <div className='songInput centerCol'>
         <input onChange={(e) => handleInput(e)} value={songName.split('_').join(' ')} placeholder='Enter a song title'></input>
-        <p className='error'>{errors.title}</p>
       </div>
+      <p className='error'>{errors.title}</p>
+      
       <div className="soundSelection centerCol">
-        <h3>Sound Selection</h3>
+        <h2>Sound Selection</h2>
         <div className='noteButton clearButton centerRow'>clear</div>
         <div className='noteButtons centerRow'>{notes.map((n, id) => {
           return <div className='noteButton centerRow' key={id} src={n.sound_file} onClick={() => playNote(id)}><p>{n.note}</p><audio className='noteAudio' src={n.sound_file}></audio></div>
@@ -358,7 +368,7 @@ const Edit = (props) => {
       </div>
 
       <div className='playingBlocks centerRow'>
-        <button className='playButton' onClick={() => playSong()}></button>
+        <button className='playButton' onClick={() => playSong()}>{'>'}</button>
         <section className='player'>
           <div className='row centerRow' id='row0'></div>
           <div className='row centerRow' id='row1'></div>
@@ -368,12 +378,12 @@ const Edit = (props) => {
       <button className='addRowsButton' onClick={() => addNewSection()}>+</button>
 
       <p className='error'>{errors.notes}</p>
-      {Auth.getUserId() === data.user && <div className='centerRow width'>
-        <button className='saveButton' onClick={() => saveSong()}>Save as new song</button>
-        <button className='saveButton' onClick={() => updateSong()}>Update</button>
-        <button className='saveButton' onClick={() => makeSure(text)}>{text}</button>
+      {Auth.getUserId() === data.user && <div className='EditButtons centerRow width'>
+        <button className='editButton' onClick={() => saveSong()}>Save as new song</button>
+        <button className='editButton' onClick={() => updateSong()}>Update</button>
+        <button className='editButton' onClick={() => makeSure(text)}>{text}</button>
       </div>}
-    </div> 
+    </div>
   )
 }
 

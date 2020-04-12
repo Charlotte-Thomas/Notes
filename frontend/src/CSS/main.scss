@@ -368,3 +368,27 @@ input {
 .commentDiv {
   flex-wrap: wrap;
 }
+
+// ---------- Edit ----------------------
+
+.EditButtons {
+  width: 60%;
+  justify-content: space-evenly;
+}
+
+.editButton {
+  padding: 15px;
+  width: 20%;
+  background: $blue200;
+  cursor: pointer;
+  font-size: 20px;
+
+  &:focus {
+    outline: 0;
+    border: none;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
