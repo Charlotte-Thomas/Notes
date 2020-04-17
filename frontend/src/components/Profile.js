@@ -23,16 +23,6 @@ const Profile = (props) => {
     return () => console.log('Unmounting component')
   }, [0])
 
-  function checkAnswer(img) {
-    let giveAnswer = 'none'
-    answer.forEach((ans) => {
-      if (img.correct_answer === ans.id) {
-        // console.log(ans.correct_answer)
-        giveAnswer = ans.correct_answer
-      }
-    })
-    return giveAnswer
-  }
 
   function findSongs(song, id) {
     if (song.user === Auth.getUserId()) {
@@ -41,16 +31,14 @@ const Profile = (props) => {
       return <div className="centerCol width">
         <div className="centerCol width">
           <h2 className="songTitle">{titleFix}</h2>
+          <div className='links centerRow'>
+            <Link to={`/edit/${song.id}`}><button>Edit Song</button></Link>
+            <Link to={`/details/${song.id}`}><button>More details</button></Link>
+          </div>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />
           </ThemeProvider>
         </div>
-        <br />
-        <div>
-          <Link to={`/edit/${song.id}`}><button>Edit Song</button></Link>
-          <Link to={`/details/${song.id}`}><button>More details</button></Link>
-        </div>
-        <br />
       </div>
     }
   }
@@ -60,7 +48,7 @@ const Profile = (props) => {
     <div className="profile centerCol">
       <h1 className="profileHeader">Your Discography</h1>
       <div className="songDiv centerRow width"> {data.map((song, id) => {
-        return <div className="card centerCol" key={id}>
+        return <div className="profileCard centerCol" key={id}>
           {findSongs(song, id)}
         </div>
       })}

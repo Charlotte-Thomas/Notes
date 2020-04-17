@@ -25,7 +25,7 @@ body {
 }
 
 #root {
-  background-color: pink;
+  // background-color: pink;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -354,18 +354,58 @@ input {
 // ------------- Profile ------------------
 
 .profile {
+  background: $blue600;
+  color: $blue50;
   h1 {
     font-size: 70px;
   }
 }
 
 .songDiv {
+  width: 93%;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-.card {
-  width: 21%;
+.profileCard {
+  // width: 21%;
+  min-width: 400px;
+  max-width: 500px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background: $blue400;
+  box-shadow: 10px 30px 10px 5px rgba(76, 75, 75, 0.377);
+  color: white;
+
+  h2 {
+    margin-bottom: 15px;
+    font-size: 25px;
+  }
+  .links {
+    justify-content: space-evenly;
+    width: 70%;
+    margin: 0 0 35px 0;
+
+      button {
+        font-size: 13px;
+        background: $blue200;
+        border: none;
+        padding: 7px 5px;
+        cursor: pointer;
+
+          &:focus {
+            outline: 0;
+            border: none;
+          }
+          &:hover {
+            opacity: 0.7;
+          }
+      }
+  }
+  .MuiPaper-root {
+    background: $blue50;
+    padding-bottom: 0;
+  }
   
   // min-width: 300px;
   // max-width: 300px;
