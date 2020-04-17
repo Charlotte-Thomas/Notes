@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Indie+Flower|Odibee+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap');
 
 
 // ------- VARIABLES ---------
@@ -21,6 +22,7 @@ $blue900: #263238;
 
 body {
   margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
   // height: 100%;
 }
 
@@ -234,7 +236,7 @@ a {
 }
 
 .addRowsButton {
-  padding: 10px 0px;
+  padding: 4px 0px 6px 0;
   background: $blue100;
   width: 4%;
   font-size: 30px;
