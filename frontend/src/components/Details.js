@@ -36,7 +36,7 @@ const Details = (props) => {
       .then(resp => resp.json())
       .then((resp) => {
         console.log(resp.username)
-        setArtist(resp.username) 
+        setArtist(resp.username)
       })
   }
 
@@ -46,9 +46,11 @@ const Details = (props) => {
 
 
   return (
-    <div className="profile centerCol">
-      <h1 className="profileHeader">{title}</h1>
-      <h2>Artist: {artist}</h2>
+    <div className="detailPage centerCol">
+      <div className='centerCol detailTitles'>
+        <h1 className="profileHeader">{title}</h1>
+        <h2>By {artist}</h2>
+      </div>
       <div className="detailPlayer centerCol">
         <ThemeProvider theme={muiTheme}>
           <AudioPlayer src={audio} />

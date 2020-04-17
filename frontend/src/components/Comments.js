@@ -48,16 +48,6 @@ const Comments = (props) => {
   }
 
 
-  function mapComments(comment, id) {
-    // console.log('names', names[0])
-    return (
-      <div className=' centerRow'>
-        <h3>{names[id]}</h3>
-        <div className='width centerRow'>{configTime(comment.time_stamp)}</div>
-        <p>{comment.text}</p>
-      </div>
-    )
-  }
 
   function configTime(time) {
     if (time) {
@@ -91,7 +81,7 @@ const Comments = (props) => {
       .catch((err) => {
         console.log(err.response.data)
         setError({
-          'errors': err.response.data ? err.response.text : ''
+          'errors': err.response.data ? err.response.data.text : ''
         })
       })
       .then(() => {
@@ -100,17 +90,32 @@ const Comments = (props) => {
       })
   }
 
+  function mapComments(comment, id) {
+    // console.log('names', names[0])
+    return (
+      <div className='centerRow commentCard'>
+        <div className='centerCol nameTime'>
+          <h3>{names[id]}</h3>
+          <div>{configTime(comment.time_stamp)}</div>
+        </div>
+        <p>{comment.text}</p>
+      </div>
+    )
+  }
 
   return (
     <div className="commentSection width centerCol">
-      <div className="commentDiv centerRow"> {comments.map((comment, id) => {
+      <h2>Comments</h2>
+      <div className='songInput centerCol'>
+        <input  onKeyPress={((e) => e.key === 'Enter' ? postComment() : null)} onChange={(e) => handleInput(e)} value={form ? form : ''} placeholder='Add a comment'></input>
+      </div>
+      <p className='centerRow'>{error.errors}</p>
+      <div className="commentDiv centerRow"> {comments.slice(0).reverse().map((comment, id) => {
         return <div className="width centerRow" key={id}>
           {mapComments(comment, id)}
         </div>
       })}
       </div>
-      <input onKeyPress={((e) => e.key === 'Enter' ? postComment() : null)} onChange={(e) => handleInput(e)} value={form ? form : ''} placeholder='Add a comment'></input>
-      <p>{error.errors}</p>
     </div>
   )
 
