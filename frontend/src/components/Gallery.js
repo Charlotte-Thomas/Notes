@@ -49,6 +49,9 @@ const Gallery = (props) => {
         return <div className='card centerCol' key={id}>
           <h2 className='title'>{song.title.split('_').join(' ')}</h2>
           <h3 className='artist'>Artist: {artists[id]}</h3>
+          <Link to={`/details/${song.id}`}>
+            <div className='detailButton'>Song Details</div>
+          </Link>
           <ThemeProvider theme={muiTheme}>
             <AudioPlayer src={song.song_file} />
           </ThemeProvider>

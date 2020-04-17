@@ -31,6 +31,10 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .centerRow {
   display: flex;
   flex-direction: row;
@@ -302,6 +306,23 @@ input {
   // background: pink;
   padding-bottom: 40px;
   // height: 100%;
+
+  .detailButton {
+    padding: 12px;
+    color: $blue50;
+    margin-bottom: 20px;
+    background: $blue600;
+    font-size: 15px;
+  
+    &:focus {
+      outline: 0;
+      border: none;
+    }
+  
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 .card {
@@ -320,7 +341,7 @@ input {
     }
     h3 {
       color: $blue50;
-      margin: 0 0 30px 0;
+      margin: 0 0 8px 0;
     }
     .MuiPaper-root {
       background: $blue50;
@@ -439,7 +460,7 @@ input {
     margin-top: 10px;
     // width: 20%;
     background: $blue700;
-    // cursor: pointer;
+    cursor: pointer;
     font-size: 15px;
     border: 1px solid $blue300;
   
