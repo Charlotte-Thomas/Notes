@@ -37,6 +37,13 @@ class NoteView(APIView):
         notes = Note.objects.all()
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        note = NoteSerializer(data=request.data)
+        if note.is_valid():
+            note.save()
+            return Response(note.data, status=HTTP_201_CREATED)
+        return Response(note.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class CommentView(APIView):

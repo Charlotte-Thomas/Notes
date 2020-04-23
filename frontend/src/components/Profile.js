@@ -43,6 +43,10 @@ const Profile = (props) => {
     }
   }
 
+  function populateNotes() {
+    
+  }
+
 
   return (
     <div className="profile centerCol">
