@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 import jwt
 from .serializers import UserSerializer
+# new:
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class RegisterView(APIView):
 

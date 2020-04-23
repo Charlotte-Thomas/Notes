@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'notes',
     'frontend',
+    'jwt_auth',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,6 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # ),  
 }
+
+
+AUTH_USER_MODEL = 'jwt_auth.User'
