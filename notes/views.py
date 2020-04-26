@@ -22,6 +22,7 @@ import os
 from os.path import abspath, basename, dirname, join, normpath
 
 notes_root = settings.MEDIA_ROOT + '/notes'
+static_root = settings.STATICFILES_DIRS[0] + '/'
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -75,18 +76,19 @@ class SongView(APIView):
         # print('noteeeesdataaa', NoteSerializer(allNotes).data['sound_file'])
         allColumns = []
         array = request.data['notes'] 
+        print('SAVEEEE', static_root)
         my_save = os.path.join(notes_root, request.data['title'] + '.wav')
         for note in array:
           notes = []
           for audio in note: # always 3 MAX (num of rows)
             if audio:
               currentNote = Note.objects.get(pk=audio)
-              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4]
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[3]
               notes.append(url)
 
           audioSegs = []
           for file in notes:
-            my_file = os.path.join(notes_root, file)
+            my_file = os.path.join(static_root, file)
             sound = AudioSegment.from_wav(my_file)
             audioSegs.append(sound)
 
@@ -157,12 +159,12 @@ class SingleSongView(APIView):
           for audio in note: # always 3 MAX (num of rows)
             if audio:
               currentNote = Note.objects.get(pk=audio)
-              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4]
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[3]
               notes.append(url)
 
           audioSegs = []
           for file in notes:
-            my_file = os.path.join(notes_root, file)
+            my_file = os.path.join(static_root, file)
             sound = AudioSegment.from_wav(my_file)
             audioSegs.append(sound)
 

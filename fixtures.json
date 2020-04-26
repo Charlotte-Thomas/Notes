@@ -1,0 +1,42 @@
+[
+  {
+    "model": "notes.Note",
+    "pk": 1,
+    "fields": {
+      "note": "A1-g",
+      "sound_file": "/api/static/A1-g.wav"
+    }
+  },
+  {
+    "model": "notes.Note",
+    "pk": 2,
+    "fields": {
+      "note": "B1-g",
+      "sound_file": "/api/static/B1-g.wav"
+    }
+  },
+  {
+    "model": "notes.Note",
+    "pk": 3,
+    "fields": {
+      "note": "C0-g",
+      "sound_file": "/api/static/C0-g.wav"
+    }
+  },
+  {
+    "model": "notes.Note",
+    "pk": 4,
+    "fields": {
+      "note": "F1-g",
+      "sound_file": "/api/static/F1-g.wav"
+    }
+  },
+  {
+    "model": "notes.Note",
+    "pk": 5,
+    "fields": {
+      "note": "G1-g",
+      "sound_file": "/api/static/G1-g.wav"
+    }
+  }
+]

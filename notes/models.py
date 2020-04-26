@@ -7,7 +7,8 @@ User = get_user_model()
 # Create your models here.
 class Note(models.Model):
     note = models.CharField(max_length=200, unique=True, null=True)
-    sound_file = models.FileField(upload_to='notes', null=True)
+    sound = models.FileField(upload_to='notes', null=True, blank=True)
+    sound_file = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f'{self.note} - {self.sound_file}'
@@ -18,7 +19,7 @@ class Song(models.Model):
     user =  models.ForeignKey(User, related_name='notes', on_delete=models.CASCADE, null=True)
     times = ArrayField(models.CharField(max_length=200), blank=True, null=True)
     notes = ArrayField(ArrayField(models.IntegerField(blank=True, null=True), blank=True, null=True), blank=True, null=True)
-    song_file = models.CharField(max_length=100,  blank=True, null=True)
+    song_file = models.CharField(max_length=100, blank=True, null=True)
     # song_file = print('/api/notes/' + str(title) + '.wav')
 
     def __str__(self):

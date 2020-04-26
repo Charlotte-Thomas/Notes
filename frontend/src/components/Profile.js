@@ -44,27 +44,29 @@ const Profile = (props) => {
   }
 
   function populateNotes(t) {
+    t.target.firstChild.play()
+    // axios.get('/api/static/B1-g.wav')
+    //   .then(resp => {
+    //     console.log(resp)
+    //     postNote(resp.data)
+    //   })
+  }
+
+  function postNote(resp) {
     // const formData = new FormData()
-    const soundfile = new Audio('./musicNotes/after.wav')
-    soundfile.play()
+    // const formData = new File()
+    // formData.append('sound_file', resp)
+    // formData.append('note', 'B1-g.wav')
 
-    const audio = new Audio('./musicNotes/after.wav')
-    audio.load()
-    audio.play()
-    // console.log(soundfile)
-    // console.log(t.target.firstChild.src)
-    // t.target.firstChild.play()
-
-    // formData.append('sound_file', soundfile.files[0])
-    // axios.post('/api/notes/', data, {
+    // axios.post('/api/notes/', formData, {
     //   headers: {
     //     'Content-type': 'multipart/form-data',
     //     Authorization: `Bearer ${Auth.getToken()}`
     //   }
     // })
     //   .then(resp => console.log(resp.data))
-    //   .then(setHideSubmit(true))
   }
+
 
 
   return (
@@ -80,7 +82,7 @@ const Profile = (props) => {
         <input type="file" id="file" name="file" value="./musicNotes/after.wav" />
       </form> */}
       {/* <audio src='./musicNotes/B1-g.wav'></audio> */}
-      <button onClick={(t) => populateNotes(t)}><audio src='musicNotes/A1-g.wav'/><audio/></button>
+      <button onClick={(t) => populateNotes(t)}><audio src='/api/static/B1-g.wav'/></button>
     </div>
   )
 
