@@ -264,16 +264,13 @@ const Create = (props) => {
     setWidth(rowWidth + 10)
     createSubSecs(`.${newClass}`)
 
-    //fixes height sizing issue:
-    const createPage = document.querySelector('.createPage')
-    createPage.classList.remove('viewHeight')
   }
 
 
 
 
   return (
-    <div className='createPage viewHeight centerCol'>
+    <div className='createPage centerCol'>
       <h1 className='createTitle'> Music Creator </h1>
       <div className='songInput centerCol'>
         {/* <h2>Name of song:</h2> */}

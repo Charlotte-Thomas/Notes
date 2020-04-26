@@ -324,9 +324,6 @@ const Edit = (props) => {
     player.appendChild(node)
     setWidth(rowWidth + 10)
     createSubSecs(`.${newClass}`)
-
-    const createPage = document.querySelector('.createPage')
-    createPage.classList.remove('viewHeight')
   }
 
   function makeSure(text) {
@@ -352,7 +349,7 @@ const Edit = (props) => {
 
 
   return (
-    <div className='createPage viewHeight centerCol'>
+    <div className='createPage centerCol'>
       <h1 className='createTitle'> Song Editor </h1>
       <div className='songInput centerCol'>
         <input onChange={(e) => handleInput(e)} value={songName.split('_').join(' ')} placeholder='Enter a song title'></input>
