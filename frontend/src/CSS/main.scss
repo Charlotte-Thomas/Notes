@@ -77,71 +77,13 @@ a {
 .slideActive {
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
-  transition-duration: 2s;
+  transition-duration: 1.8s;
 }
 
 
 
 
-// --------- create Page --------------------
 
-
-
-
-// --------- Gallery -------------
-
-
-
-// ----------- detail ------------------
-
-// .detailPage {
-//   background: $blue600;
-//   color: $blue50;
-
-//   .detailTitles {
-//     background: $blue700;
-//     margin-top: 30px;
-//     padding: 20px 10% 0 10%;
-//   }
-
-//   h1 {
-//     margin-bottom: 0;
-//     margin-top: 0;
-//     font-size: 70px;
-//   }
-//   h2 {
-//     font-size: 27px;
-//     color: $blue100;
-//   }
-
-//   button {
-//     padding: 15px;
-//     color: $blue50;
-//     margin-top: 10px;
-//     // width: 20%;
-//     background: $blue700;
-//     cursor: pointer;
-//     font-size: 15px;
-//     border: 1px solid $blue300;
-  
-//     &:focus {
-//       outline: 0;
-//       border: none;
-//     }
-  
-//     &:hover {
-//       opacity: 0.7;
-//     }
-//   }
-// }
-// .detailPlayer {
-//   margin-top: 40px;
-//   width: 40%;
-
-//   .MuiPaper-root {
-//     background: $blue200;
-//   }
-// }
 
 
 // --------- comments -----------------
@@ -222,8 +164,3 @@ a {
 
 
   // box-shadow:  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-  // 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  // 0 12.5px 10px rgba(0, 0, 0, 0.06),
-  // 0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-  // 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-  // 0 100px 80px rgba(0, 0, 0, 0.12);
