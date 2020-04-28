@@ -57,6 +57,9 @@ const Create = (props) => {
         setButtons(document.querySelectorAll('.noteButton'))
         createSubSecs()
       })
+    setTimeout(() => {
+      addSweep()
+    }, 200)
     return () => console.log('Unmounting component')
   }, [])
 
@@ -266,14 +269,18 @@ const Create = (props) => {
 
   }
 
+  function addSweep() {
+    const sweep = document.querySelector('.sweep')
+    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
+  }
+
 
 
 
   return (
     <div className='createPage centerCol'>
-      <h1 className='createTitle'> Music Creator </h1>
+      <h1 className='createTitle'> Music Creator <span className='sweep slideBefore'></span></h1>
       <div className='songInput centerCol'>
-        {/* <h2>Name of song:</h2> */}
         <input onChange={(e) => handleInput(e)} placeholder='Enter a song title'></input>
       </div>
       <p className='error'>{errors.title}</p>

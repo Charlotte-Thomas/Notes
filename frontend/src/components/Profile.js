@@ -22,7 +22,7 @@ const Profile = (props) => {
       })
     setTimeout(() => {
       addSweep()
-    }, 500)
+    }, 200)
     return () => console.log('Unmounting component')
   }, [0])
 

@@ -79,6 +79,9 @@ const Edit = (props) => {
             placeNotes(resp.notes, data)
           })
       })
+    setTimeout(() => {
+      addSweep()
+    }, 200)
     return () => console.log('Unmounting component')
   }, [0])
 
@@ -347,15 +350,20 @@ const Edit = (props) => {
       .then(() => props.history.push('/profile'))
   }
 
+  function addSweep() {
+    const sweep = document.querySelector('.sweep')
+    sweep ? sweep.classList.add('slideActive') : null
+  }
+
 
   return (
     <div className='createPage centerCol'>
-      <h1 className='createTitle'> Song Editor </h1>
+      <h1 className='createTitle'> Song Editor<span className='sweep slideBefore'></span></h1>
       <div className='songInput centerCol'>
         <input onChange={(e) => handleInput(e)} value={songName.split('_').join(' ')} placeholder='Enter a song title'></input>
       </div>
       <p className='error'>{errors.title}</p>
-      
+
       <div className="soundSelection centerCol">
         <h2>Sound Selection</h2>
         <div className='noteButton clearButton centerRow'>clear</div>

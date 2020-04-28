@@ -23,6 +23,9 @@ const Gallery = (props) => {
         console.log(resp)
         getArtist(resp)
       })
+    setTimeout(() => {
+      addSweep()
+    }, 200)
     return () => console.log('Unmounting component')
   }, [2])
 
@@ -42,9 +45,14 @@ const Gallery = (props) => {
     })
   }
 
+  function addSweep() {
+    const sweep = document.querySelector('.sweep')
+    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
+  }
+
   return (
     <div className="galleryPage centerCol">
-      <h1 className="galleryTitle createTitle">Music Gallery</h1>
+      <h1 className="galleryTitle createTitle">Music Gallery<span className='sweep slideBefore'></span></h1>
       <div className='centerRow allCards width'> {data.map((song, id) => {
         return <div className='card centerCol' key={id}>
           <h2 className='title'>{song.title.split('_').join(' ')}</h2>

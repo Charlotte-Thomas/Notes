@@ -17,32 +17,10 @@ $blue900: #263238;
   color: $blue50;
 
   h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative; // required for span transtion to work
-    padding: 10px 0;
-    margin-left: 20px;
-    font-size: 6vw;
-    margin: 30px 0 0 0;
-    min-height: 90px;
-    color: white;
-    line-height: 1.2em;
-    // background: pink;
-    z-index: 1; // set background infront or behind another (layers)
-
-  
+    font-size: 70px;
     span {
-      position: absolute;
       background: $blue600;
-      // z-index: -1;
-      width: 100%;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      top: 0;
     }
-  
   }
 }
 

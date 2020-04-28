@@ -8,6 +8,16 @@
     background: $blue700;
     margin-top: 30px;
     padding: 20px 10% 0 10%;
+    animation: fade 3s forwards;
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      topacity: 100%;
+    }
   }
 
   h1 {

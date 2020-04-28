@@ -5,6 +5,13 @@
   min-height: 100vh;
   background: $blue600;
   color: $blue50;
+
+  h1 {
+    padding-right: 20px;
+    span {
+      background: $blue600;
+    }
+  }
 }
 
 .allCards {

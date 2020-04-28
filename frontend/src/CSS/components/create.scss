@@ -7,6 +7,12 @@
   background: $blue800;
   justify-content: flex-start;
   color: $blue50;
+
+  h1 {
+    span {
+      background: $blue800;
+    }
+  }
 }
 
 
@@ -107,7 +113,7 @@
 
 .playingBlocks {
   width: 80%;
-  margin-left: 5%;
+  margin-left: 4%;
   align-self: flex-start;
   flex-wrap: wrap;
   justify-content: flex-start;
