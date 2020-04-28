@@ -1,0 +1,80 @@
+
+
+.galleryPage {
+  height: 100%;
+  min-height: 100vh;
+  background: $blue600;
+  color: $blue50;
+}
+
+.allCards {
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 70%;
+  // background: pink;
+  padding-bottom: 40px;
+  // height: 100%;
+
+  .detailButton {
+    padding: 12px;
+    color: $blue50;
+    margin-bottom: 20px;
+    background: $blue600;
+    font-size: 15px;
+  
+    &:focus {
+      outline: 0;
+      border: none;
+    }
+  
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.card {
+  // width: 50%;
+  min-width: 400px;
+  max-width: 500px;
+  margin: 30px 20px 20px 20px;
+  background: $blue400;
+  box-shadow: 10px 30px 10px 5px rgba(76, 75, 75, 0.377);
+  color: white;
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 25px;
+    }
+    h3 {
+      color: $blue50;
+      margin: 0 0 8px 0;
+    }
+    .MuiPaper-root {
+      background: $blue50;
+    }
+}
+
+// gets rid of / changes colour of auto fill that chrome adds when it auto fills form inputs:
+
+.loginForm {
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px #a1adb1 inset !important;
+  }
+
+}
+
+.registerForm {
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px #78909c inset !important;
+  }
+
+}

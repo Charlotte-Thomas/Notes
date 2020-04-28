@@ -1,0 +1,230 @@
+
+
+
+.createPage {
+  height: 100%;
+  min-height: 100vh;
+  background: $blue800;
+  justify-content: flex-start;
+  color: $blue50;
+}
+
+
+.createTitle {
+  font-size: 70px;
+  margin: 40px 0 40px 0;
+}
+
+.songInput {
+  width: 30%;
+
+    input {
+      background: $blue600;
+      color: $blue50;
+      border: none;
+      width: 80%;
+      padding: 15px 0;
+      font-size: 26px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+  ::placeholder {
+    color: $blue50;
+    opacity: 0.7;
+  }
+  ::-ms-input-placeholder { 
+    color: $blue50;
+  }
+}
+
+
+.soundSelection {
+  position: fixed;
+  top: 15vw;
+  right: 1%;
+  width: 20%;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0;
+  color: $blue900;
+  // background: $blue300;
+
+  h2 {
+    font-size: 30px;
+    color: $blue50;
+    margin-top: 0;
+  }
+}
+
+.test {
+  padding-left: 10%;
+}
+
+.noteButtons {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+}
+
+// .noteButtons::after {
+//   content: "";
+//   // justify-content:flex-start;
+//   width: 30%;
+//   // flex: auto;
+// }
+
+.clearButton {
+  background: rgb(75, 73, 73);
+  padding: 20px;
+  // width: 10%;
+  border: 2px solid black;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    opacity: 0.8;
+    }
+}
+
+.noteButton {
+  // background: lightblue;
+  flex: 1;
+  min-width: 100px;
+  max-width: 100px;
+  // padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+  border: 3px solid $blue900;
+  border-radius: 12%;
+
+  &:hover {
+  opacity: 0.8;
+  }
+}
+
+.playingBlocks {
+  width: 80%;
+  margin-left: 5%;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.playButton {
+  height: 200px;
+  align-self: flex-start;
+  border: 1px solid $blue300;
+  border-right: none;
+  padding: 0 3%;
+  // background-image: url('https://www.searchpng.com/wp-content/uploads/2019/02/Play-Free-PNG-Icon-715x673.png');
+  // background-image: url('https://lh3.googleusercontent.com/proxy/pzOXzvfup8s695PAezo8JHGkal19EUYa69ArUip2mMvIcYZUDVohuz1gP2_T7yum2HNWYRVZdSev54oP0e7R-vqTOBg-h88lIfYS30mmeCrxKPt7yDUUvZ_ekZYG_KvVCIfpw0oy-aALcHy66FMl3DkgQf5YES0vYhmVpY59');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $blue700;
+  cursor: pointer;
+
+  color: $blue50;
+  font-size: 40px;
+
+  &:focus {
+    outline: 0;
+    opacity: 0.7;
+  }
+  // &:hover {
+  // }
+}
+
+.player {
+  width: 80%;
+  height: 200px;
+  // min-width: 900px;
+  // background: lightblue;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.row {
+  width: 100%;
+  // width: 400px;
+  height: 33.3%;
+  // background: rgb(138, 138, 206);
+}
+
+.subSec {
+  flex: 1;
+  // color: $blue900;
+  color: $blue900;
+  height: 100%;
+  border: 1px solid $blue300;
+  text-align: center;
+  cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  // border-radius: 10%;
+  // margin: 1px;
+
+}
+
+.addRowsButton {
+  padding: 4px 0px 6px 0;
+  background: $blue100;
+  width: 4%;
+  font-size: 30px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+  &:focus {
+    outline: 0;
+    border: none;
+  }
+}
+
+.addedRow {
+  margin-left: 5%;
+}
+
+input {
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  padding: 6px;
+}
+
+.error {
+  color: #bcffec;
+}
+
+.saveButton {
+  padding: 15px;
+  width: 10%;
+  background: $blue200;
+  cursor: pointer;
+  font-size: 20px;
+  border: none;
+
+  &:focus {
+    outline: 0;
+    border: none;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.focus {
+  cursor: pointer;
+
+  &:focus {
+    opacity: 0.5,
+  }
+}

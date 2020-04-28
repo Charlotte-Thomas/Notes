@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Indie+Flower|Odibee+Sans&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap');
 
+@import './components/profile.scss';
+@import './components/create.scss';
+@import './components/gallery.scss';
+@import './components/details.scss';
+
 
 // ------- VARIABLES ---------
 
@@ -58,432 +63,85 @@ a {
 }
 
 
+.slideBefore {
+  // background: rgb(84, 107, 117);
+  // background: blue;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transform-origin: 100% 0%;
+  transform-origin: 100% 0%;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.slideActive {
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  transition-duration: 2s;
+}
+
+
+
+
 // --------- create Page --------------------
 
-// #efdab9
 
-.createPage {
-  height: 100%;
-  min-height: 100vh;
-  background: $blue800;
-  justify-content: flex-start;
-  color: $blue50;
-}
-
-
-.createTitle {
-  font-size: 70px;
-  margin: 40px 0 40px 0;
-}
-
-.songInput {
-  width: 30%;
-
-    input {
-      background: $blue600;
-      color: $blue50;
-      border: none;
-      width: 80%;
-      padding: 15px 0;
-      font-size: 26px;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-  ::placeholder {
-    color: $blue50;
-    opacity: 0.7;
-  }
-  ::-ms-input-placeholder { 
-    color: $blue50;
-  }
-}
-
-
-.soundSelection {
-  position: fixed;
-  top: 15vw;
-  right: 1%;
-  width: 20%;
-  margin: 0;
-  margin-bottom: 30px;
-  padding: 0;
-  color: $blue900;
-  // background: $blue300;
-
-  h2 {
-    font-size: 30px;
-    color: $blue50;
-    margin-top: 0;
-  }
-}
-
-.test {
-  padding-left: 10%;
-}
-
-.noteButtons {
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content:space-evenly;
-}
-
-// .noteButtons::after {
-//   content: "";
-//   // justify-content:flex-start;
-//   width: 30%;
-//   // flex: auto;
-// }
-
-.clearButton {
-  background: rgb(75, 73, 73);
-  padding: 20px;
-  // width: 10%;
-  border: 2px solid black;
-  cursor: pointer;
-  border-radius: 50%;
-
-  &:hover {
-    opacity: 0.8;
-    }
-}
-
-.noteButton {
-  // background: lightblue;
-  flex: 1;
-  min-width: 100px;
-  max-width: 100px;
-  // padding: 5px;
-  margin: 2px;
-  cursor: pointer;
-  border: 3px solid $blue900;
-  border-radius: 12%;
-
-  &:hover {
-  opacity: 0.8;
-  }
-}
-
-.playingBlocks {
-  width: 80%;
-  margin-left: 5%;
-  align-self: flex-start;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.playButton {
-  height: 200px;
-  border: 1px solid $blue300;
-  border-right: none;
-  padding: 0 3%;
-  // background-image: url('https://www.searchpng.com/wp-content/uploads/2019/02/Play-Free-PNG-Icon-715x673.png');
-  // background-image: url('https://lh3.googleusercontent.com/proxy/pzOXzvfup8s695PAezo8JHGkal19EUYa69ArUip2mMvIcYZUDVohuz1gP2_T7yum2HNWYRVZdSev54oP0e7R-vqTOBg-h88lIfYS30mmeCrxKPt7yDUUvZ_ekZYG_KvVCIfpw0oy-aALcHy66FMl3DkgQf5YES0vYhmVpY59');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: $blue700;
-  cursor: pointer;
-
-  color: $blue50;
-  font-size: 40px;
-
-  &:focus {
-    outline: 0;
-    opacity: 0.7;
-  }
-  // &:hover {
-  // }
-}
-
-.player {
-  width: 80%;
-  height: 200px;
-  // min-width: 900px;
-  // background: lightblue;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.row {
-  width: 100%;
-  // width: 400px;
-  height: 33.3%;
-  // background: rgb(138, 138, 206);
-}
-
-.subSec {
-  flex: 1;
-  // color: $blue900;
-  color: $blue900;
-  height: 100%;
-  border: 1px solid $blue300;
-  text-align: center;
-  cursor: pointer;
-
-    &:hover {
-      opacity: 0.7;
-    }
-  // border-radius: 10%;
-  // margin: 1px;
-
-}
-
-.addRowsButton {
-  padding: 4px 0px 6px 0;
-  background: $blue100;
-  width: 4%;
-  font-size: 30px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.7;
-  }
-  &:focus {
-    outline: 0;
-    border: none;
-  }
-}
-
-.addedRow {
-  margin-left: 10%;
-}
-
-input {
-  text-align: center;
-  font-size: 20px;
-  width: 200px;
-  padding: 6px;
-}
-
-.error {
-  color: #bcffec;
-}
-
-.saveButton {
-  padding: 15px;
-  width: 10%;
-  background: $blue200;
-  cursor: pointer;
-  font-size: 20px;
-  border: none;
-
-  &:focus {
-    outline: 0;
-    border: none;
-  }
-
-  &:hover {
-    opacity: 0.7;
-  }
-}
-
-.focus {
-  cursor: pointer;
-
-  &:focus {
-    opacity: 0.5,
-  }
-}
 
 
 // --------- Gallery -------------
 
-.galleryPage {
-  height: 100%;
-  min-height: 100vh;
-  background: $blue600;
-  color: $blue50;
-}
 
-.allCards {
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: 70%;
-  // background: pink;
-  padding-bottom: 40px;
-  // height: 100%;
-
-  .detailButton {
-    padding: 12px;
-    color: $blue50;
-    margin-bottom: 20px;
-    background: $blue600;
-    font-size: 15px;
-  
-    &:focus {
-      outline: 0;
-      border: none;
-    }
-  
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-}
-
-.card {
-  // width: 50%;
-  min-width: 400px;
-  max-width: 500px;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  background: $blue400;
-  box-shadow: 10px 30px 10px 5px rgba(76, 75, 75, 0.377);
-  color: white;
-
-    h2 {
-      margin-bottom: 15px;
-      font-size: 25px;
-    }
-    h3 {
-      color: $blue50;
-      margin: 0 0 8px 0;
-    }
-    .MuiPaper-root {
-      background: $blue50;
-    }
-}
-
-// gets rid of / changes colour of auto fill that chrome adds when it auto fills form inputs:
-
-.loginForm {
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active  {
-      -webkit-box-shadow: 0 0 0 30px #a1adb1 inset !important;
-  }
-
-}
-
-.registerForm {
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active  {
-      -webkit-box-shadow: 0 0 0 30px #78909c inset !important;
-  }
-
-}
-
-// ------------- Profile ------------------
-
-.profile {
-  height: 100%;
-  min-height: 100vh;
-  background: $blue600;
-  color: $blue50;
-  h1 {
-    font-size: 70px;
-  }
-}
-
-.songDiv {
-  width: 93%;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.profileCard {
-  // width: 21%;
-  min-width: 400px;
-  max-width: 500px;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  background: $blue400;
-  box-shadow: 10px 30px 10px 5px rgba(76, 75, 75, 0.377);
-  color: white;
-
-  h2 {
-    margin-bottom: 15px;
-    font-size: 25px;
-  }
-  .links {
-    justify-content: space-evenly;
-    width: 70%;
-    margin: 0 0 35px 0;
-
-      button {
-        font-size: 13px;
-        background: $blue200;
-        border: none;
-        padding: 7px 5px;
-        cursor: pointer;
-
-          &:focus {
-            outline: 0;
-            border: none;
-          }
-          &:hover {
-            opacity: 0.7;
-          }
-      }
-  }
-  .MuiPaper-root {
-    background: $blue50;
-    padding-bottom: 0;
-  }
-  
-  // min-width: 300px;
-  // max-width: 300px;
-}
 
 // ----------- detail ------------------
 
-.detailPage {
-  background: $blue600;
-  color: $blue50;
+// .detailPage {
+//   background: $blue600;
+//   color: $blue50;
 
-  .detailTitles {
-    background: $blue700;
-    margin-top: 30px;
-    padding: 20px 10% 0 10%;
-  }
+//   .detailTitles {
+//     background: $blue700;
+//     margin-top: 30px;
+//     padding: 20px 10% 0 10%;
+//   }
 
-  h1 {
-    margin-bottom: 0;
-    margin-top: 0;
-    font-size: 70px;
-  }
-  h2 {
-    font-size: 27px;
-    color: $blue100;
-  }
+//   h1 {
+//     margin-bottom: 0;
+//     margin-top: 0;
+//     font-size: 70px;
+//   }
+//   h2 {
+//     font-size: 27px;
+//     color: $blue100;
+//   }
 
-  button {
-    padding: 15px;
-    color: $blue50;
-    margin-top: 10px;
-    // width: 20%;
-    background: $blue700;
-    cursor: pointer;
-    font-size: 15px;
-    border: 1px solid $blue300;
+//   button {
+//     padding: 15px;
+//     color: $blue50;
+//     margin-top: 10px;
+//     // width: 20%;
+//     background: $blue700;
+//     cursor: pointer;
+//     font-size: 15px;
+//     border: 1px solid $blue300;
   
-    &:focus {
-      outline: 0;
-      border: none;
-    }
+//     &:focus {
+//       outline: 0;
+//       border: none;
+//     }
   
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-}
-.detailPlayer {
-  margin-top: 40px;
-  width: 40%;
+//     &:hover {
+//       opacity: 0.7;
+//     }
+//   }
+// }
+// .detailPlayer {
+//   margin-top: 40px;
+//   width: 40%;
 
-  .MuiPaper-root {
-    background: $blue200;
-  }
-}
+//   .MuiPaper-root {
+//     background: $blue200;
+//   }
+// }
 
 
 // --------- comments -----------------

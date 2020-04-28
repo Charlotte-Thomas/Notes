@@ -20,6 +20,9 @@ const Profile = (props) => {
         console.log(resp)
         setData(resp)
       })
+    setTimeout(() => {
+      addSweep()
+    }, 500)
     return () => console.log('Unmounting component')
   }, [0])
 
@@ -43,46 +46,25 @@ const Profile = (props) => {
     }
   }
 
-  function populateNotes(t) {
-    t.target.firstChild.play()
-    // axios.get('/api/static/B1-g.wav')
-    //   .then(resp => {
-    //     console.log(resp)
-    //     postNote(resp.data)
-    //   })
+  function addSweep() {
+    const sweep = document.querySelector('.sweep')
+    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
   }
 
-  function postNote(resp) {
-    // const formData = new FormData()
-    // const formData = new File()
-    // formData.append('sound_file', resp)
-    // formData.append('note', 'B1-g.wav')
 
-    // axios.post('/api/notes/', formData, {
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     Authorization: `Bearer ${Auth.getToken()}`
-    //   }
-    // })
-    //   .then(resp => console.log(resp.data))
-  }
 
 
 
   return (
     <div className="profile centerCol">
-      <h1 className="profileHeader">Your Discography</h1>
+      <h1>Your Discography<span className='sweep slideBefore'></span></h1>
+      {/* <h1 className="profileHeader">Your Discography<span className=''>sss</span></h1> */}
       <div className="songDiv centerRow width"> {data.map((song, id) => {
         return <div className="profileCard centerCol" key={id}>
           {findSongs(song, id)}
         </div>
       })}
       </div>
-      {/* <form encType="multipart/form-data">
-        <input type="file" id="file" name="file" value="./musicNotes/after.wav" />
-      </form> */}
-      {/* <audio src='./musicNotes/B1-g.wav'></audio> */}
-      <button onClick={(t) => populateNotes(t)}><audio src='/api/static/B1-g.wav'/></button>
     </div>
   )
 
