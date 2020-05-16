@@ -12,6 +12,7 @@ import Gallery from './components/Gallery'
 import Edit from './components/Edit'
 import Profile from './components/Profile'
 import Details from './components/Details'
+import Home from './components/Home'
 
 const App = () => (
 
@@ -20,6 +21,7 @@ const App = () => (
     <Switch>
       <Route exact path='/' component={Login} />
       <Route exact path='/register' component={Register} />
+      <Route exact path='/home' component={Home} />
       <Route exact path='/create' component={Create} />
       <Route exact path='/edit/:id' component={Edit} />
       <Route exact path='/gallery' component={Gallery} />
