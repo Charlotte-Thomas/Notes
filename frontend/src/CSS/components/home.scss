@@ -13,4 +13,33 @@
       background: $blue600;
     }
   }
+
+
+
+  h2:nth-child(1) {
+    margin-top: 50px;
+  }
+
+  h2 {
+    color: $blue50;
+  }
+
+  .info {
+    color: $blue200;
+    width: 80%;
+    font-size: 18px;
+  }
+
+  ol {
+    width: 80%;
+  }
+  li {
+    margin-left: 20px;
+    margin-top: 4px;
+    padding-left: 5px;
+  }
+
+  b {
+    color: $blue50;
+  }
 }
