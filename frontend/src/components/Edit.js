@@ -323,7 +323,6 @@ const Edit = (props) => {
     axios.delete(`/api/songs/${props.match.params.id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      // .then((resp) => console.log(resp))
       .catch((err) => {
         setError({
           'notes': err.response.data ? 'unauthorised!' : ''
