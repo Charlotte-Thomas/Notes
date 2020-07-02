@@ -36,6 +36,7 @@ const Home = (props) => {
             <li>Start of your music creation by adding a title for your song</li>
             <li>Next use the player below to select one or mutiple blocks</li>
             <li>Once selected click one of the coloured sound bites on the right to place into the block(s) or clear them</li>
+            <li>In order for gaps in your song to be recognised please add a single "Blank" block to a column</li>
             <li>To play your song, click the > button on the left of the player</li>
             <li>Sound blocks in the same column of the player will overlay each other</li>
             <li>The player will play your song from left to right</li>

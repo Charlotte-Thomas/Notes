@@ -209,7 +209,6 @@ const Create = (props) => {
       }
     })
     // console.log('chuild', rows[0].children.length > 0 ? 'yay' : 'empty')
-    console.log(grid)
     addClickEvents()
   }
 
