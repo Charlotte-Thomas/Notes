@@ -74,7 +74,6 @@ const Register = (props) => {
   function handleInput(e) {
     updateForm({ ...form, [e.target.name]: e.target.value })
     setError({ ...error, errors: '' })
-    console.log(form)
   }
 
   function handleSubmit(e) {

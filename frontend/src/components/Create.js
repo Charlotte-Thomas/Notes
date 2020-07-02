@@ -101,7 +101,6 @@ const Create = (props) => {
 
   function makeBlockChanges(el) {
     setError(initialErrorState)
-    console.log(errors.notes)
     el.innerHTML = 'choose sound from selection'
     el.classList.add(classes.opacity)
     // el.style.opacity = '0.5'
@@ -110,7 +109,6 @@ const Create = (props) => {
   }
 
   function playSong() {
-    // console.log('playgrdi', rowWidth)
     for (let i = 0; i < rowWidth; i++) {
       grid.forEach((row) => {
         setTimeout(() => {
@@ -141,8 +139,6 @@ const Create = (props) => {
       })
       noteIds.push(ids)
     }
-    console.log('ids', noteIds)
-    console.log('times', times)
   }
 
   function handleInput(e) {
@@ -152,10 +148,8 @@ const Create = (props) => {
 
   function getIds(tune) {
     let giveId = 0
-    console.log(tune)
     notes.forEach((obj) => {
       if (obj.sound_file === tune) {
-        console.log('match')
         // noteIds.push(obj.id)
         giveId = obj.id
       }
@@ -166,7 +160,7 @@ const Create = (props) => {
 
   function saveSong() {
     getValues()
-    console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
+    // console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
     if (times.length === 0) {
       setError({
         'notes': 'add some notes first!'
@@ -176,9 +170,7 @@ const Create = (props) => {
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      // .then((resp) => console.log(resp.data))
       .catch((err, resp) => {
-        // console.log(err.response.data)
         setError({
           'title': err.response.data.title ? err.response.data.title[0] : '',
           'notes': err.response.data.notes ? 'add some notes first!' : ''
@@ -191,7 +183,6 @@ const Create = (props) => {
   // ---------- Grid Creation ------------
 
   function createSubSecs(newRows) {
-    console.log(newRows)
     let newClass = '.row'
     if (newRows) {
       newClass = newRows
@@ -233,7 +224,6 @@ const Create = (props) => {
   }
 
   function updateGrid() {
-    console.log('rowwidth', rowWidth)
     grid.splice(0, grid.length)
     const sections = document.querySelectorAll('.player')
     for (let y = 0; y < 3; y++) {
@@ -245,14 +235,12 @@ const Create = (props) => {
       })
       grid.push(rowx)
     }
-    // console.log('newgrid', grid)
   }
 
   function addNewSection() {
     const prevWidth = rowWidth
     const newClass = `newRow${prevWidth}`
     const player = document.querySelector('.playingBlocks')
-    console.log(newClass)
     const node = document.createElement('section')
     node.classList.add('player')
     for (let i = 0; i < 3; i++) {
@@ -271,7 +259,7 @@ const Create = (props) => {
 
   function addSweep() {
     const sweep = document.querySelector('.sweep')
-    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
+    sweep ? sweep.classList.add('slideActive') : null
   }
 
 
@@ -326,7 +314,5 @@ export default Create
 //song genres
 // create minus button to remove song level
 
-
-//height still not fixed
 
 

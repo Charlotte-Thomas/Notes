@@ -55,7 +55,6 @@ const Edit = (props) => {
       .then(resp => resp.json())
       .then(resp => {
         setNotes(resp)
-        console.log(resp)
         return resp
       })
       .then((resp) => {
@@ -67,12 +66,11 @@ const Edit = (props) => {
         fetch(`/api/songs/${props.match.params.id}`)
           .then(resp => resp.json())
           .then(resp => {
-            console.log(Math.ceil(resp.notes.length / 10))
+            // console.log(Math.ceil(resp.notes.length / 10))
             const sectionNUm = Math.ceil(resp.notes.length / 10)
             setName(resp.title)
             updateForm(resp.title)
             setData(resp)
-            console.log('songData', resp.notes)
             for (let i = 1; i < sectionNUm; i++) {
               addNewSection()
             }
@@ -87,13 +85,10 @@ const Edit = (props) => {
 
 
   function placeNotes(data, Allnotes) {
-    console.log('boop', Allnotes)
-    console.log('GRID', grid)
     Allnotes.forEach((note, i) => {
       data.forEach((noteArray, x) => {
         noteArray.forEach((noteId, y) => {
           if (noteId === note.id) {
-            console.log('match', note.note)
             //have to create a p element because when selecting notes changing the innerHTML adds one anyway
             const p = document.createElement('p')
             grid[y][x].insertBefore(p, grid[y][x].childNodes[0])
@@ -107,7 +102,7 @@ const Edit = (props) => {
       })
     })
     updateGrid()
-    console.log('GRID AFTER', grid)
+    // console.log('GRID AFTER', grid)
   }
 
 
@@ -140,7 +135,7 @@ const Edit = (props) => {
             b.firstChild.src = note.attributes[1].value
             // b.children[1].classList.remove('noteAudio')
             b.children[1].removeAttribute('class')
-            console.log(b.children[1].attributes)
+            // console.log(b.children[1].attributes)
             updateGrid()
           }
         })
@@ -152,7 +147,6 @@ const Edit = (props) => {
 
   function makeBlockChanges(el) {
     setError(initialErrorState)
-    console.log(errors.notes)
     el.innerHTML = 'choose sound from selection'
     el.classList.add(classes.opacity)
     // el.style.opacity = '0.5'
@@ -185,7 +179,6 @@ const Edit = (props) => {
         const audio = row[i].children[1]
         if (audio) {
           times.push(i)
-          console.log(audio.attributes)
           ids.push(getIds(audio.attributes[0].value))
         } else {
           ids.push(0)
@@ -193,8 +186,6 @@ const Edit = (props) => {
       })
       noteIds.push(ids)
     }
-    console.log('ids', noteIds)
-    console.log('times', times)
   }
 
   function handleInput(e) {
@@ -205,10 +196,8 @@ const Edit = (props) => {
 
   function getIds(tune) {
     let giveId = 0
-    console.log(tune)
     notes.forEach((obj) => {
       if (obj.sound_file === tune) {
-        console.log('match')
         // noteIds.push(obj.id)
         giveId = obj.id
       }
@@ -219,13 +208,12 @@ const Edit = (props) => {
 
   function saveSong() {
     getValues()
-    console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
+    // console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
     axios.post('/api/songs/', { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds, 'song_file': 'none' }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.response.data))
+      // .then((resp) => console.log(resp.response.data))
       .catch((err) => {
-        console.log(err.response.data)
         setError({
           'title': err.response.data.title ? err.response.data.title[0] : '',
           'notes': err.response.data.notes ? 'add some notes first!' : ''
@@ -235,11 +223,11 @@ const Edit = (props) => {
 
   function updateSong() {
     getValues()
-    console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
+    // console.log({ 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds })
     axios.put(`/api/songs/${props.match.params.id}/`, { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.data))
+      // .then((resp) => console.log(resp.data))
       .catch((err) => {
         console.log(err)
         setError({
@@ -252,7 +240,6 @@ const Edit = (props) => {
   // ---------- Grid Creation ------------
 
   function createSubSecs(newRows) {
-    // console.log(newRows)
     let newClass = '.row'
     if (newRows) {
       newClass = newRows
@@ -294,7 +281,6 @@ const Edit = (props) => {
   }
 
   function updateGrid() {
-    // console.log('rowwidth', rowWidth)
     grid.splice(0, grid.length)
     const sections = document.querySelectorAll('.player')
     for (let y = 0; y < 3; y++) {
@@ -306,14 +292,12 @@ const Edit = (props) => {
       })
       grid.push(rowx)
     }
-    // console.log('newgrid', grid)
   }
 
   function addNewSection() {
     const prevWidth = rowWidth
     const newClass = `newRow${prevWidth}`
     const player = document.querySelector('.playingBlocks')
-    console.log(newClass)
     const node = document.createElement('section')
     node.classList.add('player')
     for (let i = 0; i < 3; i++) {
@@ -340,9 +324,8 @@ const Edit = (props) => {
     axios.delete(`/api/songs/${props.match.params.id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp))
+      // .then((resp) => console.log(resp))
       .catch((err) => {
-        console.log(err.response.data)
         setError({
           'notes': err.response.data ? 'unauthorised!' : ''
         })

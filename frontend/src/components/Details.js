@@ -21,7 +21,6 @@ const Details = (props) => {
     fetch(`/api/songs/${props.match.params.id}`)
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp)
         setData(resp)
         setTitle(resp.title.split('_').join(' '))
         setAudio(resp.song_file)
@@ -35,7 +34,6 @@ const Details = (props) => {
     fetch(`/api/users/${user}`)
       .then(resp => resp.json())
       .then((resp) => {
-        console.log(resp.username)
         setArtist(resp.username)
       })
   }

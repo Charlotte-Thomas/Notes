@@ -77,9 +77,7 @@ const Comments = (props) => {
     axios.post('/api/comments/', { 'song': song, 'text': form }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.data))
       .catch((err) => {
-        console.log(err.response.data)
         setError({
           'errors': err.response.data ? err.response.data.text : ''
         })
@@ -91,7 +89,6 @@ const Comments = (props) => {
   }
 
   function mapComments(comment, id) {
-    // console.log('names', names[0])
     return (
       <div className='centerRow commentCard'>
         <div className='centerCol nameTime'>

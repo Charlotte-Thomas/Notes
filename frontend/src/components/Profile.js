@@ -17,7 +17,6 @@ const Profile = (props) => {
     fetch('/api/songs/')
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp)
         setData(resp)
       })
     setTimeout(() => {
@@ -29,7 +28,7 @@ const Profile = (props) => {
 
   function findSongs(song, id) {
     if (song.user === Auth.getUserId()) {
-      console.log(song.title.split('_').join(' '))
+      // console.log(song.title.split('_').join(' '))
       const titleFix = song.title.split('_').join(' ')
       return <div className="centerCol width">
         <div className="centerCol width">
@@ -48,7 +47,7 @@ const Profile = (props) => {
 
   function addSweep() {
     const sweep = document.querySelector('.sweep')
-    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
+    sweep ? sweep.classList.add('slideActive') : null
   }
 
 

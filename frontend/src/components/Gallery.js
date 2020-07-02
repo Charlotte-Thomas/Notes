@@ -20,7 +20,6 @@ const Gallery = (props) => {
       .then(resp => resp.json())
       .then(resp => {
         setData(resp)
-        console.log(resp)
         getArtist(resp)
       })
     setTimeout(() => {
@@ -35,11 +34,9 @@ const Gallery = (props) => {
       fetch(`/api/users/${song.user}`)
         .then(resp => resp.json())
         .then((resp) => {
-          console.log(resp.username)
           array.push(resp.username)
           if (i === songs.length - 1) {
             setArtists(array)
-            // console.log(artists)
           }
         })
     })
@@ -47,7 +44,7 @@ const Gallery = (props) => {
 
   function addSweep() {
     const sweep = document.querySelector('.sweep')
-    sweep ? sweep.classList.add('slideActive') + console.log('yaaa') : null
+    sweep ? sweep.classList.add('slideActive') : null
   }
 
   return (
