@@ -239,9 +239,9 @@ const Edit = (props) => {
     axios.put(`/api/songs/${props.match.params.id}/`, { 'title': form ? form.split(' ').join('_') : '', 'times': times, 'notes': noteIds }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => console.log(resp.response.data))
+      .then((resp) => console.log(resp.data))
       .catch((err) => {
-        console.log(err.response.data)
+        console.log(err)
         setError({
           'title': err.response.data.title ? err.response.data.title[0] : '',
           'notes': err.response.data.notes ? 'add some notes first!' : ''

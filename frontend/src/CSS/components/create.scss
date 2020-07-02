@@ -180,10 +180,12 @@
 
 .addRowsButton {
   padding: 4px 0px 6px 0;
-  background: $blue100;
+  background: $blue200;
   width: 4%;
   font-size: 30px;
   cursor: pointer;
+  border: none;
+  color: $blue900;
 
   &:hover {
     opacity: 0.7;
