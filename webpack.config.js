@@ -8,8 +8,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'frontend/dist'),
-    publicPath: '/frontend'
-    // publicPath: '/'
+    publicPath: '/'
 
   },
   devtool: 'source-maps',
