@@ -7,8 +7,8 @@ module.exports = {
   context: path.resolve(__dirname, 'frontend'),
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'frontend/dist')
-    // publicPath: '/frontend'
+    path: path.resolve(__dirname, 'frontend/dist'),
+    publicPath: '/frontend'
     // publicPath: '/'
 
   },
