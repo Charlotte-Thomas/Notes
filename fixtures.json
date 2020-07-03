@@ -38,5 +38,13 @@
       "note": "G1-g",
       "sound_file": "/api/static/G1-g.wav"
     }
+  },
+  {
+    "model": "notes.Note",
+    "pk": 6,
+    "fields": {
+      "note": "Blank",
+      "sound_file": "/api/static/Blank.wav"
+    }
   }
 ]
