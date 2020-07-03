@@ -22,7 +22,7 @@ import os
 from os.path import abspath, basename, dirname, join, normpath
 
 notes_root = settings.MEDIA_ROOT + '/notes'
-static_root = settings.STATICFILES_DIRS[0] + '/'
+static_root = settings.STATIC_ROOT + '/'
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
