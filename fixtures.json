@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "note": "A1-g",
-      "sound_file": "/api/static/A1-g.wav"
+      "sound_file": "/api/media/notes/A1-g.wav"
     }
   },
   {
@@ -12,7 +12,7 @@
     "pk": 2,
     "fields": {
       "note": "B1-g",
-      "sound_file": "/api/static/B1-g.wav"
+      "sound_file": "/api/media/notes/B1-g.wav"
     }
   },
   {
@@ -20,7 +20,7 @@
     "pk": 3,
     "fields": {
       "note": "C0-g",
-      "sound_file": "/api/static/C0-g.wav"
+      "sound_file": "/api/media/notes/C0-g.wav"
     }
   },
   {
@@ -28,7 +28,7 @@
     "pk": 4,
     "fields": {
       "note": "F1-g",
-      "sound_file": "/api/static/F1-g.wav"
+      "sound_file": "/api/media/notes/F1-g.wav"
     }
   },
   {
@@ -36,7 +36,7 @@
     "pk": 5,
     "fields": {
       "note": "G1-g",
-      "sound_file": "/api/static/G1-g.wav"
+      "sound_file": "/api/media/notes/G1-g.wav"
     }
   },
   {
@@ -44,7 +44,7 @@
     "pk": 6,
     "fields": {
       "note": "Blank",
-      "sound_file": "/api/static/Blank.wav"
+      "sound_file": "/api/media/notes/Blank.wav"
     }
   }
 ]

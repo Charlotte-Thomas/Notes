@@ -21,8 +21,10 @@ from pydub import AudioSegment
 import os  
 from os.path import abspath, basename, dirname, join, normpath
 
-notes_root = settings.MEDIA_ROOT + '/notes'
-static_root = settings.STATIC_ROOT + '/'
+notes_root = settings.MEDIA_ROOT + '/songs'
+# static_root = settings.STATIC_ROOT + '/'
+# static_root = settings.STATICFILES_DIRS[0] + '/'
+static_root = settings.MEDIA_ROOT + '/notes'
 
 class UserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -35,6 +37,7 @@ class NoteView(APIView):
   # added permission_classes to views which need authentication 
     # permission_classes = [IsAuthenticated]
     def get(self, request):
+        print('STATIC_ROOT',static_root)
         notes = Note.objects.all()
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
@@ -83,7 +86,8 @@ class SongView(APIView):
           for audio in note: # always 3 MAX (num of rows)
             if audio:
               currentNote = Note.objects.get(pk=audio)
-              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[3]
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4] # CHANGED FROM 3 TO 4 SINCE NOT USING STATIC!!
+              print('URRRRLLL', url)
               notes.append(url)
 
           audioSegs = []
@@ -159,7 +163,7 @@ class SingleSongView(APIView):
           for audio in note: # always 3 MAX (num of rows)
             if audio:
               currentNote = Note.objects.get(pk=audio)
-              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[3]
+              url =  NoteSerializer(currentNote).data['sound_file'].split('/')[4] # CHANGED FROM 3 TO 4 SINCE NOT USING STATIC!!
               notes.append(url)
 
           audioSegs = []
