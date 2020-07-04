@@ -115,7 +115,7 @@ class SongView(APIView):
           final_sound.duration_seconds == 150
           final_sound.export(my_save, format="wav")
         
-        request.data['song_file'] = '/api/media/notes/' + request.data['title'] + '.wav'
+        request.data['song_file'] = '/api/media/songs/' + request.data['title'] + '.wav' #CHANGED TO /SONGS SINCE FOLDER ADDED
         song = SongSerializer(data=request.data)
 
         if song.is_valid():
@@ -189,7 +189,7 @@ class SingleSongView(APIView):
           final_sound.duration_seconds == 150
           final_sound.export(my_save, format="wav")
         
-        request.data['song_file'] = '/api/media/notes/' + request.data['title'] + '.wav'
+        request.data['song_file'] = '/api/media/songs/' + request.data['title'] + '.wav'
 
 
         updated_song = SongSerializer(song, data=request.data)
