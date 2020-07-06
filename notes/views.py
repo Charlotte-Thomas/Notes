@@ -219,6 +219,3 @@ class SingleUserView(APIView):
 # combined_sounds = sound1 + sound2
 # combined_sounds.export(my_save, format="wav")
 
-
-
-# /Users/charlottethomas/development/projects/Notes/notes
