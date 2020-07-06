@@ -80,7 +80,8 @@ class SongView(APIView):
         allColumns = []
         array = request.data['notes'] 
         print('SAVEEEE', static_root)
-        my_save = os.path.join(notes_root, request.data['title'] + '.wav')
+        # my_save = os.path.join(notes_root, request.data['title'] + '.wav')
+        my_save = os.path.join(notes_root)
         for note in array:
           notes = []
           for audio in note: # always 3 MAX (num of rows)
