@@ -33,7 +33,7 @@ const Home = (props) => {
           </ol>
           <h2>Creator instructions</h2>
           <ol>
-            <li>Start of your music creation by adding a title for your song</li>
+            <li>Start off your music creation by adding a title for your song</li>
             <li>Next use the player below to select one or mutiple blocks</li>
             <li>Once selected click one of the coloured sound bites on the right to place into the block(s) or clear them</li>
             <li>In order for gaps in your song to be recognised please add a single "Blank" block to a column</li>
